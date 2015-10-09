@@ -8,11 +8,11 @@ namespace EncryptiontAndDecryption
 {
     public class EncryptionAndDecryption
     {
-        public static string EncryptMessage(string message, double numberOfColumns)
+        public static string EncryptMessage(string message, int numberOfColumns)
         {
             string encryptedMessage= "";
             int messageLength = message.Length;
-            int numberOfLines = (int)Math.Ceiling(messageLength / numberOfColumns);
+            int numberOfLines = (int)Math.Ceiling((double)messageLength / numberOfColumns);
 
             for (var i = 0; i < numberOfLines; i++)
             {
