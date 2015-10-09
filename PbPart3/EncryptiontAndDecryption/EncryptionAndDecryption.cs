@@ -31,6 +31,22 @@ namespace EncryptiontAndDecryption
                 return encryptedMessage;
         }
 
+        public static string DecryptMessage(string encryptedMessage, int numberOfColumns)
+        {
+            string decryptedMessage = "";
+            int encryptedMessageLength = encryptedMessage.Length;
+            int numberOfLines = encryptedMessageLength / numberOfColumns;
+
+            for (int i = 0; i < numberOfColumns; i++)
+            {
+                for (int j= 0; j < numberOfLines; j++)
+
+                    decryptedMessage += encryptedMessage[i+j*numberOfColumns];
+            }
+
+                return decryptedMessage;
+        }
+
         public static char PickRandomLetter()
         {
             Random r = new Random();

@@ -29,6 +29,21 @@ namespace EncryptionAndDecryption.Tests
            Assert.AreEqual(expectedEncryptedMessage, encryptedMessage);
         }
 
+        [TestMethod]
+        public void DecryptMessageNEEAIRCSCIAAANA0IUC0()
+        {
+            int numberOfColumns = 4;
+            string encryptedMessage = "NEEAIRCSCIAAANA0IUC0";
+            string expectedDecryptedMessage = "NICAIERINUECAACASA00";
+
+            int encryptedMessageLength = encryptedMessage.Length;
+            int numberOfLines = encryptedMessageLength / numberOfColumns;
+
+            string decryptedMessage = EncryptiontAndDecryption.EncryptionAndDecryption.DecryptMessage(encryptedMessage, numberOfColumns);
+
+            Assert.AreEqual(expectedDecryptedMessage, decryptedMessage);
+        }
+
         private static char[] ReplaceRandomLettersWith0(double numberOfColumns, int messageLength, int numberOfLines, ref char[] charencryptedMessage, int encryptedMessageLength)
         {
             int howManyLettersAreRandom = (int)(numberOfColumns * numberOfLines - messageLength);
