@@ -8,9 +8,11 @@ namespace EncryptiontAndDecryption
 {
     public class EncryptionAndDecryption
     {
-        public static string EncryptMessage(string message, double numberOfColumns, int messageLength, int numberOfLines)
+        public static string EncryptMessage(string message, double numberOfColumns)
         {
             string encryptedMessage= "";
+            int messageLength = message.Length;
+            int numberOfLines = (int)Math.Ceiling(messageLength / numberOfColumns);
 
             for (var i = 0; i < numberOfLines; i++)
             {
@@ -19,28 +21,22 @@ namespace EncryptiontAndDecryption
                     int nr = i + (j * numberOfLines);
 
                     if (nr < messageLength)                  
-                        encryptedMessage = encryptedMessage + message[nr];                   
+                        encryptedMessage += message[nr];                   
                     else
                     {
-                        var randomLetter = PickRandomLetter();
-                        encryptedMessage = encryptedMessage + randomLetter;
+                        encryptedMessage += PickRandomLetter();
                     }
                 }
             }
                 return encryptedMessage;
         }
 
-        public static string PickRandomLetter()
+        public static char PickRandomLetter()
         {
-            String[] alphabet = {
-                                        "A","B","C","D","E","F","G","H","I","J","K","L","M",
-                                        "N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
-                                };
-
             Random r = new Random();
 
             int position = r.Next(0, 26);
-            string letter = alphabet[position];
+            char letter =(char) ('a'+position);
 
             return letter;
         }

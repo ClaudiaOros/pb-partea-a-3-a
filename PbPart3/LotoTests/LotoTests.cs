@@ -15,7 +15,7 @@ namespace LotoTests
 
             long odds = PbPart3.Loto.CalculateOdds(numbersToBeGuessed, totalNumbers);
 
-            Assert.AreEqual("10", odds.ToString(), "The odds are not calculated correctly");
+            Assert.AreEqual(10, odds, "The odds are not calculated correctly");
         }
 
         [TestMethod]
@@ -26,7 +26,7 @@ namespace LotoTests
 
             long odds = PbPart3.Loto.CalculateOdds(numbersToBeGuessed, totalNumbers);
 
-            Assert.AreEqual("13983816", odds.ToString(), "The odds are not calculated correctly");
+            Assert.AreEqual(13983816, odds, "The odds are not calculated correctly");
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace LotoTests
 
             long odds = PbPart3.Loto.CalculateOdds(numbersToBeGuessed, totalNumbers);
 
-            Assert.AreEqual("1906884", odds.ToString(), "The odds are not calculated correctly");
+            Assert.AreEqual(1906884, odds, "The odds are not calculated correctly");
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace LotoTests
 
             long odds = PbPart3.Loto.CalculateOdds(numbersToBeGuessed, totalNumbers);
 
-            Assert.AreEqual("211876", odds.ToString(), "The odds are not calculated correctly");
+            Assert.AreEqual(211876, odds, "The odds are not calculated correctly");
         }
     }
 }
