@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loto", "PbPart3\Loto.csproj", "{F2BCDD7C-B0B3-45D0-A424-64290B170022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loto.Tests", "LotoTests\Loto.Tests.csproj", "{6C3A8F51-54A2-4B7D-A394-C9E57ED1F451}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptiontAndDecryption", "EncryptiontAndDecryption\EncryptiontAndDecryption.csproj", "{1E247F27-C85B-4639-B991-28A1A06BB7BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionAndDecryption.Tests", "EncryptionAndDecryption.Tests\EncryptionAndDecryption.Tests.csproj", "{88776E2E-B7DE-46C3-B400-6A9782EC4ADD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2BCDD7C-B0B3-45D0-A424-64290B170022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2BCDD7C-B0B3-45D0-A424-64290B170022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2BCDD7C-B0B3-45D0-A424-64290B170022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2BCDD7C-B0B3-45D0-A424-64290B170022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C3A8F51-54A2-4B7D-A394-C9E57ED1F451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C3A8F51-54A2-4B7D-A394-C9E57ED1F451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C3A8F51-54A2-4B7D-A394-C9E57ED1F451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C3A8F51-54A2-4B7D-A394-C9E57ED1F451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E247F27-C85B-4639-B991-28A1A06BB7BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E247F27-C85B-4639-B991-28A1A06BB7BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E247F27-C85B-4639-B991-28A1A06BB7BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E247F27-C85B-4639-B991-28A1A06BB7BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88776E2E-B7DE-46C3-B400-6A9782EC4ADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88776E2E-B7DE-46C3-B400-6A9782EC4ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88776E2E-B7DE-46C3-B400-6A9782EC4ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88776E2E-B7DE-46C3-B400-6A9782EC4ADD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

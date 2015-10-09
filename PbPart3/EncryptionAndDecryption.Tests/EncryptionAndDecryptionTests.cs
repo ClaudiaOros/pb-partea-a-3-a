@@ -18,7 +18,7 @@ namespace EncryptionAndDecryption.Tests
             int messageLength = message.Length;
             int numberOfLines = (int)Math.Ceiling(messageLength / numberOfColumns);
 
-            string encryptedMessage = EncryptiontAndDecryption.EncryptionAndDecryption.EncryptMessage(message, numberOfColumns, messageLength, numberOfLines);
+            string encryptedMessage = EncryptiontAndDecryption.EncryptionAndDecryption.EncryptMessage(message, numberOfColumns);
 
             int encryptedMessageLength = encryptedMessage.Length;
             var charencryptedMessage = encryptedMessage.ToCharArray();
