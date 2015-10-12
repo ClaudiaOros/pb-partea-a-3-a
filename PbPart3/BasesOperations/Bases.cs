@@ -17,6 +17,7 @@ namespace BasesOperations
             {
                 var modulo = decimalNumber % baseNumber;
                 convertedNumber[i] = (byte)modulo;
+                decimalNumber = (int)decimalNumber / baseNumber;
                 i++;
             }
 
