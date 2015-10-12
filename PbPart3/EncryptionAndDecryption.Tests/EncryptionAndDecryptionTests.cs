@@ -33,7 +33,7 @@ namespace EncryptionAndDecryption.Tests
         public void DecryptMessageNEEAIRCSCIAAANA0IUC0()
         {
             int numberOfColumns = 4;
-            string encryptedMessage = "NEEAIRCSCIAAANA0IUC0";
+            string encryptedMessage = "NEEAIRCSCIAAANA+IUC*";
             string expectedDecryptedMessage = "NICAIERINUECAACASA";
 
             int encryptedMessageLength = encryptedMessage.Length;
@@ -41,42 +41,61 @@ namespace EncryptionAndDecryption.Tests
 
             string decryptedMessage = EncryptiontAndDecryption.EncryptionAndDecryption.DecryptMessage(encryptedMessage, numberOfColumns);
 
-            decryptedMessage = CreateDecryptedMessages(numberOfColumns, expectedDecryptedMessage, numberOfLines, decryptedMessage);
+            decryptedMessage = CreateDecryptedMessageWithoutSpecialCharacters(numberOfColumns, expectedDecryptedMessage, numberOfLines, decryptedMessage);
 
             Assert.AreEqual(expectedDecryptedMessage, decryptedMessage);
         }
 
-        private static string CreateDecryptedMessages(int numberOfColumns, string expectedDecryptedMessage, int numberOfLines, string decryptedMessage)
+        private static string CreateDecryptedMessageWithoutSpecialCharacters(int numberOfColumns, string expectedDecryptedMessage, int numberOfLines, string decryptedMessage)
         {
-            string[] messages = new string[numberOfLines];
-            messages[0] = decryptedMessage;
-            for (int i = 1; i < numberOfColumns; i++)
+
+            var decryptedMessageLength = decryptedMessage.Length;
+
+            for (int i = 0; i < decryptedMessageLength; i++)
             {
-                for (int j = (decryptedMessage.Length - numberOfColumns); j < decryptedMessage.Length; j++)
+                int asciiCode = (int)decryptedMessage[i];
+                if (((asciiCode < 65 ) || (asciiCode > 122)) || ((asciiCode > 90) & (asciiCode < 97)))
                 {
-                    messages[i] = decryptedMessage.Remove(decryptedMessage.Length - i);
+                     decryptedMessage = decryptedMessage.Remove(i, 1);
+                     decryptedMessageLength--;
+                     i--;
                 }
             }
 
-            for (int i = 0; i < numberOfColumns; i++)
-            {
-                if (messages[i].Length == expectedDecryptedMessage.Length)
-                {
-                    decryptedMessage = messages[i];
-                }
-            }
             return decryptedMessage;
         }
+
+        //private static string CreateDecryptedMessages(int numberOfColumns, string expectedDecryptedMessage, int numberOfLines, string decryptedMessage)
+        //{
+        //    string[] messages = new string[numberOfLines];
+        //    messages[0] = decryptedMessage;
+        //    for (int i = 1; i < numberOfColumns; i++)
+        //    {
+        //        for (int j = (decryptedMessage.Length - numberOfColumns); j < decryptedMessage.Length; j++)
+        //        {
+        //            messages[i] = decryptedMessage.Remove(decryptedMessage.Length - i);
+        //        }
+        //    }
+
+        //    for (int i = 0; i < numberOfColumns; i++)
+        //    {
+        //        if (messages[i].Length == expectedDecryptedMessage.Length)
+        //        {
+        //            decryptedMessage = messages[i];
+        //        }
+        //    }
+        //    return decryptedMessage;
+        //}
 
         private static char[] ReplaceRandomLettersWith0(double numberOfColumns, int messageLength, int numberOfLines, ref char[] charencryptedMessage, int encryptedMessageLength)
         {
             int howManyLettersAreRandom = (int)(numberOfColumns * numberOfLines - messageLength);
 
             int i = 0;
-            for (int j = encryptedMessageLength-1; j > 0; j--)
+            for (int j = encryptedMessageLength - 1; j > 0; j--)
             {
 
-                if (j % numberOfColumns == (numberOfColumns-1))
+                if (j % numberOfColumns == (numberOfColumns - 1))
                 {
                     charencryptedMessage[j] = '0';
                     i++;
