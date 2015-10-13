@@ -89,5 +89,17 @@ namespace OperationsOnBases.Tests
 
             CollectionAssert.AreEqual(expectedBinaryNumber, resultedBinaryNumber);
         }
+
+        [TestMethod]
+        public void VerifyLessThanOperatorForBinaryNumbers()
+        {
+            byte[] firstBinaryNumber = new byte[] { 0, 0, 0, 1, 1 };
+            byte[] secondBinaryNumber = new byte[] { 0, 0, 1, 1, 1 };
+            bool areEqual = false;
+
+            bool firstNumberIsGreater = OperationsOnBases.OperatorLessThan(firstBinaryNumber, secondBinaryNumber, areEqual);
+
+            Assert.AreEqual(false, firstNumberIsGreater);
+        }
     }
 }

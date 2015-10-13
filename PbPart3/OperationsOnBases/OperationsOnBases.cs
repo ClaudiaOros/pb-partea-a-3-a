@@ -114,5 +114,39 @@ namespace OperationsOnBases
 
             return resultedBinaryNumber;
         }
+
+        public static bool OperatorLessThan(byte[] firstBinaryNumber, byte[] secondBinaryNumber, bool areEqual)
+        {
+            bool firstNumberisGreater = false;
+
+            CompareTwoNumbersOfTheSameLength(firstBinaryNumber, secondBinaryNumber, ref firstNumberisGreater, ref areEqual);
+
+            return firstNumberisGreater;
+        }
+
+        private static void CompareTwoNumbersOfTheSameLength(byte[] firstBinaryNumber, byte[] secondBinaryNumber, ref bool firstNumberisGreater, ref bool areEqual)
+        {
+            for (int i = 0; i < firstBinaryNumber.Length; i++)
+            {
+                if (firstBinaryNumber[i] == secondBinaryNumber[i])
+                {
+                    areEqual = true;
+                    i++;
+                }
+                else
+                    if (firstBinaryNumber[i] < secondBinaryNumber[i])
+                    {
+                        firstNumberisGreater = false;
+                        areEqual = false;
+                        break;
+                    }
+                    else
+                    {
+                        firstNumberisGreater = true;
+                        areEqual = false;
+                        break;
+                    }
+            }
+        }
     }
 }
