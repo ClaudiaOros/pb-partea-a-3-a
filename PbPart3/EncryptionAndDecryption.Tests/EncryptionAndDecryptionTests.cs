@@ -54,38 +54,21 @@ namespace EncryptionAndDecryption.Tests
             for (int i = 0; i < decryptedMessageLength; i++)
             {
                 int asciiCode = (int)decryptedMessage[i];
-                if (((asciiCode < 65 ) || (asciiCode > 122)) || ((asciiCode > 90) & (asciiCode < 97)))
-                {
-                     decryptedMessage = decryptedMessage.Remove(i, 1);
-                     decryptedMessageLength--;
-                     i--;
-                }
+                RemoveCharsThatAreNotLetters(ref decryptedMessage, ref decryptedMessageLength, ref i, asciiCode);
             }
 
             return decryptedMessage;
         }
 
-        //private static string CreateDecryptedMessages(int numberOfColumns, string expectedDecryptedMessage, int numberOfLines, string decryptedMessage)
-        //{
-        //    string[] messages = new string[numberOfLines];
-        //    messages[0] = decryptedMessage;
-        //    for (int i = 1; i < numberOfColumns; i++)
-        //    {
-        //        for (int j = (decryptedMessage.Length - numberOfColumns); j < decryptedMessage.Length; j++)
-        //        {
-        //            messages[i] = decryptedMessage.Remove(decryptedMessage.Length - i);
-        //        }
-        //    }
-
-        //    for (int i = 0; i < numberOfColumns; i++)
-        //    {
-        //        if (messages[i].Length == expectedDecryptedMessage.Length)
-        //        {
-        //            decryptedMessage = messages[i];
-        //        }
-        //    }
-        //    return decryptedMessage;
-        //}
+        private static void RemoveCharsThatAreNotLetters(ref string decryptedMessage, ref int decryptedMessageLength, ref int i, int asciiCode)
+        {
+            if (((asciiCode < 'A') || (asciiCode > 'Z')) || ((asciiCode > 'z') & (asciiCode < 'a')))
+            {
+                decryptedMessage = decryptedMessage.Remove(i, 1);
+                decryptedMessageLength--;
+                i--;
+            }
+        }
 
         private static char[] ReplaceRandomLettersWith0(double numberOfColumns, int messageLength, int numberOfLines, ref char[] charencryptedMessage, int encryptedMessageLength)
         {
