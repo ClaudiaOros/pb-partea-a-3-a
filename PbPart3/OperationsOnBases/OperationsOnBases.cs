@@ -30,10 +30,10 @@ namespace OperationsOnBases
         {
             for (int i = 0; i < binaryNumber.Length; i++)
             {
-                  if ( binaryNumber[i] == 1 )
-                      binaryNumber[i] = 0;
-                  else
-                      binaryNumber[i] = 1;
+                if (binaryNumber[i] == 1)
+                    binaryNumber[i] = 0;
+                else
+                    binaryNumber[i] = 1;
 
             }
 
@@ -42,52 +42,46 @@ namespace OperationsOnBases
 
         public static byte[] OperatorAnd(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
         {
+            byte[] resultedBinary = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
 
-            var resultedBinary= new byte[firstBinaryNumber.Length];
-
-            for (int i = 0; i < firstBinaryNumber.Length; i++)
+            for (int i = 0; i < resultedBinary.Length; i++)
             {
-                if ((firstBinaryNumber[i] == 1) & (secondBinaryNumber[i] == 1))
+                if ((GetElem(firstBinaryNumber, i) == 1) & (GetElem(secondBinaryNumber, i) == 1))
                     resultedBinary[i] = 1;
                 else
-                 //   if (((firstBinaryNumber[i] == 0) & (secondBinaryNumber[i] == 0)) || ((firstBinaryNumber[i]) != (secondBinaryNumber[i])))
-                        resultedBinary[i] = 0;
+                    resultedBinary[i] = 0;
             }
-
+            Array.Reverse(resultedBinary);
             return resultedBinary;
         }
 
         public static byte[] OperatorOR(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
         {
+            byte[] resultedBinary = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
 
-            var resultedBinary = new byte[firstBinaryNumber.Length];
-
-            for (int i = 0; i < firstBinaryNumber.Length; i++)
+            for (int i = 0; i < resultedBinary.Length; i++)
             {
-                if ((firstBinaryNumber[i] == 0) & (secondBinaryNumber[i] == 0))
+                if ((GetElem(firstBinaryNumber, i) == 0) & (GetElem(secondBinaryNumber, i) == 0))
                     resultedBinary[i] = 0;
                 else
-                //    if (((firstBinaryNumber[i] == 1) & (secondBinaryNumber[i] == 1)) || ((firstBinaryNumber[i]) != (secondBinaryNumber[i])))
-                        resultedBinary[i] = 1;
+                    resultedBinary[i] = 1;
             }
-
+            Array.Reverse(resultedBinary);
             return resultedBinary;
         }
 
         public static byte[] OperatorXOR(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
         {
-
-            var resultedBinary = new byte[firstBinaryNumber.Length];
+            byte[] resultedBinary = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
 
             for (int i = 0; i < firstBinaryNumber.Length; i++)
             {
-                if (((firstBinaryNumber[i] == 0) & (secondBinaryNumber[i] == 0)) || ((firstBinaryNumber[i] == 1) & (secondBinaryNumber[i] == 1)))
+                if (((GetElem(firstBinaryNumber, i) == 0) & (GetElem(secondBinaryNumber, i) == 0)) || ((GetElem(firstBinaryNumber, i) == 1) & (GetElem(secondBinaryNumber, i) == 1)))
                     resultedBinary[i] = 0;
                 else
-               //     if ((firstBinaryNumber[i]) != (secondBinaryNumber[i]))
-                        resultedBinary[i] = 1;
+                    resultedBinary[i] = 1;
             }
-
+            Array.Reverse(resultedBinary);
             return resultedBinary;
         }
 
@@ -97,56 +91,104 @@ namespace OperationsOnBases
 
             for (int i = value; i < binaryNumber.Length; i++)
             {
-                resultedBinaryNumber[i] = binaryNumber[i-value];
+                resultedBinaryNumber[i] = binaryNumber[i - value];
             }
 
-                return resultedBinaryNumber;
+            return resultedBinaryNumber;
         }
 
         public static byte[] OperatorLeftHandShift(byte[] binaryNumber, int value)
         {
             var resultedBinaryNumber = new byte[binaryNumber.Length];
 
-            for (int i = 0; i < binaryNumber.Length-value; i++)
+            for (int i = 0; i < binaryNumber.Length - value; i++)
             {
-                resultedBinaryNumber[i] = binaryNumber[value+i];
+                resultedBinaryNumber[i] = binaryNumber[value + i];
             }
 
             return resultedBinaryNumber;
         }
 
-        public static bool OperatorLessThan(byte[] firstBinaryNumber, byte[] secondBinaryNumber, bool areEqual)
+        public static bool OperatorLessThan(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
         {
-            bool firstNumberisGreater = false;
+            bool FirstNumberIsLess = false;
+            int maxLength = GetMaxLength(firstBinaryNumber, secondBinaryNumber).Length;
 
-            CompareTwoNumbersOfTheSameLength(firstBinaryNumber, secondBinaryNumber, ref firstNumberisGreater, ref areEqual);
-
-            return firstNumberisGreater;
-        }
-
-        private static void CompareTwoNumbersOfTheSameLength(byte[] firstBinaryNumber, byte[] secondBinaryNumber, ref bool firstNumberisGreater, ref bool areEqual)
-        {
-            for (int i = 0; i < firstBinaryNumber.Length; i++)
+            for (int i = 0; i < maxLength; i++)
             {
-                if (firstBinaryNumber[i] == secondBinaryNumber[i])
+                if (GetElemForLessThan(firstBinaryNumber, i, maxLength) < GetElemForLessThan(secondBinaryNumber, i,maxLength))
                 {
-                    areEqual = true;
-                    i++;
+                    FirstNumberIsLess = true;
+                    break;
                 }
                 else
-                    if (firstBinaryNumber[i] < secondBinaryNumber[i])
+                {
+                    FirstNumberIsLess = false;
+                    break;
+                }
+            }
+            return FirstNumberIsLess;
+        }
+
+        public static byte[] OperationAddition(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
+        {
+            byte[] resultedBinaryNumber = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
+            byte reminder = 0;
+
+            for (int i = 0; i < resultedBinaryNumber.Length; i++)
+            {
+                if ((GetElem(firstBinaryNumber, i) == 1) & (GetElem(secondBinaryNumber, i) == 1) & (reminder == 0))
+                {
+                    resultedBinaryNumber[i] = 0;
+                    reminder = 1;
+                }
+                else
+                    if ((GetElem(firstBinaryNumber, i) == 1) & (GetElem(secondBinaryNumber, i) == 1) & (reminder == 1))
                     {
-                        firstNumberisGreater = false;
-                        areEqual = false;
-                        break;
+                        resultedBinaryNumber[i] = 1;
+                        reminder = 0;
                     }
                     else
-                    {
-                        firstNumberisGreater = true;
-                        areEqual = false;
-                        break;
-                    }
+                        if (reminder == 0)
+                        resultedBinaryNumber[i] = (byte)(GetElem(firstBinaryNumber, i) + GetElem(secondBinaryNumber, i));
+                       
+
             }
+
+                return resultedBinaryNumber;
+        }
+
+        public static byte[] OperationSubstraction(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
+        {
+            byte[] resultedBinaryNumber = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
+
+            return resultedBinaryNumber;
+        }
+
+        private static byte[] GetMaxLength(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
+        {
+            byte[] resultedBinary = new byte[0];
+            if ((firstBinaryNumber.Length) > (secondBinaryNumber.Length))
+                resultedBinary = new byte[firstBinaryNumber.Length];
+            else
+                resultedBinary = new byte[secondBinaryNumber.Length];
+            return resultedBinary;
+        }
+
+        public static byte GetElem(byte[] array, int i)
+        {
+            if (i < array.Length)
+                return array[array.Length - i - 1];
+            else
+                return 0;
+        }
+
+        public static byte GetElemForLessThan(byte[] array, int i, int maxLength)
+        {
+            if (i >= maxLength - array.Length)
+                return array[i - (maxLength - array.Length - 1)];
+            else
+                return 0;
         }
     }
 }

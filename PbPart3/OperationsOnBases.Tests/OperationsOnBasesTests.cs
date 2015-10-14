@@ -12,7 +12,7 @@ namespace OperationsOnBases.Tests
         {
             int decimalNumber = 12;
             int baseNumber = 2;
-            byte[] expectedNumber = new byte[]{1, 1, 0, 0};
+            byte[] expectedNumber = new byte[] { 1, 1, 0, 0 };
 
             byte[] convertedNumber = OperationsOnBases.ConvertADecimalNumberIntoAnotherBase(decimalNumber, baseNumber);
 
@@ -34,8 +34,8 @@ namespace OperationsOnBases.Tests
         public void VerifyBitwiseANDoperatorForBinaryNumbers()
         {
             byte[] firstBinaryNumber = new byte[] { 1, 0, 0, 1, 1 };
-            byte[] secondBinaryNumber = new byte[] { 0, 0, 1, 1, 1 };
-            byte[] expectedBinaryNumber = new byte[] {  0, 0, 0, 1, 1 };
+            byte[] secondBinaryNumber = new byte[] { 1, 1, 1 };
+            byte[] expectedBinaryNumber = new byte[] { 0, 0, 0, 1, 1 };
 
             byte[] resultedBinaryNumber = OperationsOnBases.OperatorAnd(firstBinaryNumber, secondBinaryNumber);
 
@@ -46,7 +46,7 @@ namespace OperationsOnBases.Tests
         public void VerifyBitwiseORoperatorForBinaryNumbers()
         {
             byte[] firstBinaryNumber = new byte[] { 1, 0, 0, 1, 1 };
-            byte[] secondBinaryNumber = new byte[] { 0, 0, 1, 1, 1 };
+            byte[] secondBinaryNumber = new byte[] { 1, 1, 1 };
             byte[] expectedBinaryNumber = new byte[] { 1, 0, 1, 1, 1 };
 
             byte[] resultedBinaryNumber = OperationsOnBases.OperatorOR(firstBinaryNumber, secondBinaryNumber);
@@ -93,13 +93,84 @@ namespace OperationsOnBases.Tests
         [TestMethod]
         public void VerifyLessThanOperatorForBinaryNumbers()
         {
-            byte[] firstBinaryNumber = new byte[] { 0, 0, 0, 1, 1 };
-            byte[] secondBinaryNumber = new byte[] { 0, 0, 1, 1, 1 };
+            byte[] firstBinaryNumber = new byte[] { 1, 1, 1 };
+            byte[] secondBinaryNumber = new byte[] { 1, 1, 1, 1 };
+
+            bool firstNumberIsLess = OperationsOnBases.OperatorLessThan(firstBinaryNumber, secondBinaryNumber);
+
+            Assert.AreEqual(true, firstNumberIsLess);
+        }
+
+        [TestMethod]
+        public void VerifyGreaterThanOperatorForBinaryNumbers()
+        {
+            byte[] firstBinaryNumber = new byte[] { 1, 1, 1, 1 };
+            byte[] secondBinaryNumber = new byte[] { 1, 1, 1 };
+
+            bool firstNumberIsLess = OperationsOnBases.OperatorLessThan(firstBinaryNumber, secondBinaryNumber);
+            bool firstNumberIsGreater = !firstNumberIsLess;
+
+            Assert.AreEqual(true, firstNumberIsGreater);
+        }
+
+        [TestMethod]
+        public void VerifyEqualOperatorForBinaryNumbers()
+        {
+            byte[] firstBinaryNumber = new byte[] { 1, 1, 1, 0 };
+            byte[] secondBinaryNumber = new byte[] { 1, 1, 1, 0 };
+
+            bool firstNumberIsLess = OperationsOnBases.OperatorLessThan(firstBinaryNumber, secondBinaryNumber);
+            bool secondNumberIsLess = OperationsOnBases.OperatorLessThan(secondBinaryNumber, firstBinaryNumber);
+
             bool areEqual = false;
 
-            bool firstNumberIsGreater = OperationsOnBases.OperatorLessThan(firstBinaryNumber, secondBinaryNumber, areEqual);
+            if ((firstNumberIsLess == false) & (secondNumberIsLess == false))
+                areEqual = true;
+            
+            Assert.AreEqual(true, areEqual);
+        }
 
-            Assert.AreEqual(false, firstNumberIsGreater);
+
+        [TestMethod]
+        public void VerifyNotEqualOperatorForBinaryNumbers()
+        {
+
+            byte[] firstBinaryNumber = new byte[] { 1, 1, 1, 0 };
+            byte[] secondBinaryNumber = new byte[] { 1, 1, 1};
+
+            bool firstNumberIsLess = OperationsOnBases.OperatorLessThan(firstBinaryNumber, secondBinaryNumber);
+            bool secondNumberIsLess = OperationsOnBases.OperatorLessThan(secondBinaryNumber, firstBinaryNumber);
+
+            bool areEqual = false;
+
+            if ((firstNumberIsLess == false) & (secondNumberIsLess == false))
+                areEqual = true;
+
+            Assert.AreEqual(false, areEqual);
+        }
+
+        [TestMethod]
+        public void VerifyAdditionBetweenTwoBinaryNumbers()
+        {
+            byte[] firstBinaryNumber = new byte[] { 1, 0, 1, 1 };
+            byte[] secondBinaryNumber = new byte[] { 1, 0, 1, 1 };
+            byte[] expectedSum = new byte[] { 1, 0, 1, 1, 0 };
+
+            byte[] sum = OperationsOnBases.OperationAddition(firstBinaryNumber, secondBinaryNumber);
+
+            Assert.AreEqual(expectedSum, sum);
+        }
+
+        [TestMethod]
+        public void VerifySubstractionBetweenTwoBinaryNumbers()
+        {
+            byte[] firstBinaryNumber = new byte[] { 1, 0, 1, 1 };
+            byte[] secondBinaryNumber = new byte[] { 1, 0, 1, 1 };
+            byte[] expectedSum = new byte[] { 0, 0, 0, 0 };
+
+            byte[] sum = OperationsOnBases.OperationSubstraction(firstBinaryNumber, secondBinaryNumber);
+
+            Assert.AreEqual(expectedSum, sum);
         }
     }
 }
