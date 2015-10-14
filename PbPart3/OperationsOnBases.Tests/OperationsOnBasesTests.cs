@@ -158,7 +158,7 @@ namespace OperationsOnBases.Tests
 
             byte[] sum = OperationsOnBases.OperationAddition(firstBinaryNumber, secondBinaryNumber);
 
-            Assert.AreEqual(expectedSum, sum);
+            CollectionAssert.AreEqual(expectedSum, sum);
         }
 
         [TestMethod]

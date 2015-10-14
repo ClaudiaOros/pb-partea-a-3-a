@@ -34,7 +34,6 @@ namespace OperationsOnBases
                     binaryNumber[i] = 0;
                 else
                     binaryNumber[i] = 1;
-
             }
 
             return binaryNumber;
@@ -135,7 +134,7 @@ namespace OperationsOnBases
             byte[] resultedBinaryNumber = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
             byte reminder = 0;
 
-            for (int i = 0; i <= resultedBinaryNumber.Length; i++)
+            for (int i = 0; i < resultedBinaryNumber.Length; i++)
             {
                 if ((GetElem(firstBinaryNumber, i) + (GetElem(secondBinaryNumber, i)) >= 2) & (reminder == 0))
                 {
@@ -167,7 +166,14 @@ namespace OperationsOnBases
                              }
             }
 
-                return resultedBinaryNumber;
+            if (reminder == 1)
+            {
+                Array.Resize(ref resultedBinaryNumber, resultedBinaryNumber.Length + 1);
+                resultedBinaryNumber[resultedBinaryNumber.Length-1] = 1;
+            }
+
+            Array.Reverse(resultedBinaryNumber);
+            return resultedBinaryNumber;
         }
 
         public static byte[] OperationSubstraction(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
