@@ -39,43 +39,52 @@ namespace OperationsOnBases
             return binaryNumber;
         }
 
-        public static byte[] OperatorAnd(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
+        public static byte[] OperatorAnd(byte[] first, byte[] second)
         {
-            byte[] resultedBinary = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
+            var maxLength = Math.Max(first.Length, second.Length);
+            byte[] resultedBinary = new byte [maxLength];
+            var index = 0;
 
             for (int i = 0; i < resultedBinary.Length; i++)
             {
-                if ((GetElem(firstBinaryNumber, i) == 1) & (GetElem(secondBinaryNumber, i) == 1))
-                    resultedBinary[i] = 1;
-                else
-                    resultedBinary[i] = 0;
+                index = resultedBinary.Length - i - 1;
+                resultedBinary[index] = OperatorAnd(GetElem(first, i), GetElem(second, i));
             }
-            Array.Reverse(resultedBinary);
             return resultedBinary;
         }
 
-        public static byte[] OperatorOR(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
+        public static byte OperatorAnd(byte first, byte second)
         {
-            byte[] resultedBinary = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
+            return (first == 1) && (second == 1) ? (byte)1 : (byte)0;
+        }
+
+        public static byte[] OperatorOR(byte[] first, byte[] second)
+        {
+            var maxLength = Math.Max(first.Length, second.Length);
+            byte[] resultedBinary = new byte[maxLength];
+            var index = 0;
 
             for (int i = 0; i < resultedBinary.Length; i++)
             {
-                if ((GetElem(firstBinaryNumber, i) == 0) & (GetElem(secondBinaryNumber, i) == 0))
-                    resultedBinary[i] = 0;
-                else
-                    resultedBinary[i] = 1;
+                index = resultedBinary.Length - i - 1;
+                resultedBinary[index] = OperatorOR(GetElem(first, i), GetElem(second, i));
             }
-            Array.Reverse(resultedBinary);
             return resultedBinary;
         }
 
-        public static byte[] OperatorXOR(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
+        public static byte OperatorOR(byte first, byte second)
         {
-            byte[] resultedBinary = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
+            return (first == 0) && (second == 0) ? (byte)0 : (byte)1;
+        }
 
-            for (int i = 0; i < firstBinaryNumber.Length; i++)
+        public static byte[] OperatorXOR(byte[] first, byte[] second)
+        {
+            var maxLength = Math.Max(first.Length, second.Length);
+            byte[] resultedBinary = new byte[maxLength];
+
+            for (int i = 0; i < first.Length; i++)
             {
-                if (((GetElem(firstBinaryNumber, i) == 0) & (GetElem(secondBinaryNumber, i) == 0)) || ((GetElem(firstBinaryNumber, i) == 1) & (GetElem(secondBinaryNumber, i) == 1)))
+                if (((GetElem(first, i) == 0) & (GetElem(second, i) == 0)) || ((GetElem(first, i) == 1) & (GetElem(second, i) == 1)))
                     resultedBinary[i] = 0;
                 else
                     resultedBinary[i] = 1;
@@ -108,14 +117,15 @@ namespace OperationsOnBases
             return resultedBinaryNumber;
         }
 
-        public static bool OperatorLessThan(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
+        public static bool OperatorLessThan(byte[] first, byte[] second)
         {
             bool FirstNumberIsLess = false;
-            int maxLength = GetMaxLength(firstBinaryNumber, secondBinaryNumber).Length;
+
+            int maxLength = Math.Max(first.Length, second.Length);
 
             for (int i = 0; i < maxLength; i++)
             {
-                if (GetElemForLessThan(firstBinaryNumber, i, maxLength) < GetElemForLessThan(secondBinaryNumber, i,maxLength))
+                if (GetElemForLessThan(first, i, maxLength) < GetElemForLessThan(second, i,maxLength))
                 {
                     FirstNumberIsLess = true;
                     break;
@@ -129,38 +139,39 @@ namespace OperationsOnBases
             return FirstNumberIsLess;
         }
 
-        public static byte[] OperationAddition(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
+        public static byte[] OperationAddition(byte[] first, byte[] second)
         {
-            byte[] resultedBinaryNumber = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
+            var maxLength = Math.Max(first.Length, second.Length);
+            byte[] resultedBinaryNumber = new byte[maxLength];
             byte reminder = 0;
 
             for (int i = 0; i < resultedBinaryNumber.Length; i++)
             {
-                if ((GetElem(firstBinaryNumber, i) + (GetElem(secondBinaryNumber, i)) >= 2) & (reminder == 0))
+                if ((GetElem(first, i) + (GetElem(second, i)) >= 2) & (reminder == 0))
                 {
                     resultedBinaryNumber[i] = 0;
                     reminder = 1;
                 }
                 else
-                    if ((GetElem(firstBinaryNumber, i) + (GetElem(secondBinaryNumber, i)) >= 2) & (reminder == 1))
+                    if ((GetElem(first, i) + (GetElem(second, i)) >= 2) & (reminder == 1))
                     {
                         resultedBinaryNumber[i] = 1;
                         reminder = 1;
                     }
                     else
-                        if ((GetElem(firstBinaryNumber, i) + (GetElem(secondBinaryNumber, i)) < 2) & (reminder == 0))
-                        resultedBinaryNumber[i] = (byte)(GetElem(firstBinaryNumber, i) + GetElem(secondBinaryNumber, i));
+                        if ((GetElem(first, i) + (GetElem(second, i)) < 2) & (reminder == 0))
+                        resultedBinaryNumber[i] = (byte)(GetElem(first, i) + GetElem(second, i));
                         else 
-                             if ((GetElem(firstBinaryNumber, i) + (GetElem(secondBinaryNumber, i)) < 2) & (reminder == 1))
+                             if ((GetElem(first, i) + (GetElem(second, i)) < 2) & (reminder == 1))
                              {
-                                 if ((GetElem(firstBinaryNumber, i) + GetElem(secondBinaryNumber, i) + reminder) >= 2)
+                                 if ((GetElem(first, i) + GetElem(second, i) + reminder) >= 2)
                                  {
                                      resultedBinaryNumber[i] = 0;
                                      reminder = 1;
                                  }
                                  else
                                  {
-                                     resultedBinaryNumber[i] = (byte)(GetElem(firstBinaryNumber, i) + GetElem(secondBinaryNumber, i) + reminder);
+                                     resultedBinaryNumber[i] = (byte)(GetElem(first, i) + GetElem(second, i) + reminder);
                                      reminder = 0;
                                  }
                              }
@@ -176,21 +187,12 @@ namespace OperationsOnBases
             return resultedBinaryNumber;
         }
 
-        public static byte[] OperationSubstraction(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
+        public static byte[] OperationSubstraction(byte[] first, byte[] second)
         {
-            byte[] resultedBinaryNumber = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
+            var maxLength = Math.Max(first.Length, second.Length);
+            byte[] resultedBinaryNumber = new byte[maxLength];
 
             return resultedBinaryNumber;
-        }
-
-        private static byte[] GetMaxLength(byte[] firstBinaryNumber, byte[] secondBinaryNumber)
-        {
-            byte[] resultedBinary = new byte[0];
-            if ((firstBinaryNumber.Length) > (secondBinaryNumber.Length))
-                resultedBinary = new byte[firstBinaryNumber.Length];
-            else
-                resultedBinary = new byte[secondBinaryNumber.Length];
-            return resultedBinary;
         }
 
         public static byte GetElem(byte[] array, int i)
