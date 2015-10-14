@@ -135,24 +135,36 @@ namespace OperationsOnBases
             byte[] resultedBinaryNumber = GetMaxLength(firstBinaryNumber, secondBinaryNumber);
             byte reminder = 0;
 
-            for (int i = 0; i < resultedBinaryNumber.Length; i++)
+            for (int i = 0; i <= resultedBinaryNumber.Length; i++)
             {
-                if ((GetElem(firstBinaryNumber, i) == 1) & (GetElem(secondBinaryNumber, i) == 1) & (reminder == 0))
+                if ((GetElem(firstBinaryNumber, i) + (GetElem(secondBinaryNumber, i)) >= 2) & (reminder == 0))
                 {
                     resultedBinaryNumber[i] = 0;
                     reminder = 1;
                 }
                 else
-                    if ((GetElem(firstBinaryNumber, i) == 1) & (GetElem(secondBinaryNumber, i) == 1) & (reminder == 1))
+                    if ((GetElem(firstBinaryNumber, i) + (GetElem(secondBinaryNumber, i)) >= 2) & (reminder == 1))
                     {
                         resultedBinaryNumber[i] = 1;
-                        reminder = 0;
+                        reminder = 1;
                     }
                     else
-                        if (reminder == 0)
+                        if ((GetElem(firstBinaryNumber, i) + (GetElem(secondBinaryNumber, i)) < 2) & (reminder == 0))
                         resultedBinaryNumber[i] = (byte)(GetElem(firstBinaryNumber, i) + GetElem(secondBinaryNumber, i));
-                       
-
+                        else 
+                             if ((GetElem(firstBinaryNumber, i) + (GetElem(secondBinaryNumber, i)) < 2) & (reminder == 1))
+                             {
+                                 if ((GetElem(firstBinaryNumber, i) + GetElem(secondBinaryNumber, i) + reminder) >= 2)
+                                 {
+                                     resultedBinaryNumber[i] = 0;
+                                     reminder = 1;
+                                 }
+                                 else
+                                 {
+                                     resultedBinaryNumber[i] = (byte)(GetElem(firstBinaryNumber, i) + GetElem(secondBinaryNumber, i) + reminder);
+                                     reminder = 0;
+                                 }
+                             }
             }
 
                 return resultedBinaryNumber;
