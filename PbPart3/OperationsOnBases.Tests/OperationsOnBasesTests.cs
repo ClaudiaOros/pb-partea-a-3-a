@@ -127,7 +127,7 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
-        public void VerifyLessThanOperatorFornumbers()
+        public void VerifyLessThanOperatorTest1()
         {
             byte[] first = new byte[] { 1, 1, 1 };
             byte[] second = new byte[] { 1, 1, 1, 1 };
@@ -138,7 +138,7 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
-        public void VerifyLessThanOperatorFornumbers2()
+        public void VerifyLessThanOperatorTest2()
         {
             byte[] first = new byte[] { 1, 1, 1, 0 };
             byte[] second = new byte[] { 1, 1, 1, 1};
@@ -149,7 +149,18 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
-        public void VerifyGreaterThanOperatorFornumbers()
+        public void VerifyLessThanOperatorTest3()
+        {
+            byte[] first = new byte[] { 0, 1, 1, 0 };
+            byte[] second = new byte[] { 1, 1, 1, 1 };
+
+            bool firstNumberIsLess = OperationsOnBases.OperatorLessThan(first, second);
+
+            Assert.AreEqual(true, firstNumberIsLess);
+        }
+
+        [TestMethod]
+        public void VerifyGreaterThanOperatorTest1()
         {
             byte[] first = new byte[] { 1, 1, 1, 1 };
             byte[] second = new byte[] { 1, 1, 1 };
@@ -160,7 +171,7 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
-        public void VerifyGreaterThanOperatorFornumbers2()
+        public void VerifyGreaterThanOperatorTest2()
         {
             byte[] first = new byte[] { 1, 1, 1, 1 };
             byte[] second = new byte[] { 1, 1, 1, 1 };
@@ -171,7 +182,7 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
-        public void VerifyGreaterThanOperatorFornumbers3()
+        public void VerifyGreaterThanOperatorTest3()
         {
             byte[] first = new byte[] { 1, 1, 1, 1 };
             byte[] second = new byte[] { 1, 1, 1, 0 };
@@ -182,7 +193,7 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
-        public void VerifyEqualOperatorFornumbers()
+        public void VerifyEqualOperatorTest1()
         {
             byte[] first = new byte[] { 1, 1, 1, 0 };
             byte[] second = new byte[] { 1, 1, 1, 0 };
@@ -193,7 +204,7 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
-        public void VerifyEqualOperatorFornumbers2()
+        public void VerifyEqualOperatorTest2()
         {
             byte[] first = new byte[] { 1, 1, 1};
             byte[] second = new byte[] { 1, 1, 1, 0 };
@@ -204,7 +215,7 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
-        public void VerifyEqualOperatorFornumbers3()
+        public void VerifyEqualOperatorTest3()
         {
             byte[] first = new byte[] { 1, 1, 1 ,1};
             byte[] second = new byte[] { 1, 1, 1, 0 };
@@ -215,7 +226,7 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
-        public void VerifyNotEqualOperatorFornumbers()
+        public void VerifyNotEqualOperator()
         {
 
             byte[] first = new byte[] { 1, 1, 1, 0 };
@@ -233,25 +244,53 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
-        public void VerifyAdditionBetweenTwonumbers()
+        public void VerifyAdditionBetweenTwonumbersTest1()
         {
             byte[] first = new byte[] { 1, 0, 1, 1 };
             byte[] second = new byte[] { 1, 0, 1, 1 };
             byte[] expectedSum = new byte[] { 1, 0, 1, 1, 0 };
+            int baseNumber = 2;
 
-            byte[] sum = OperationsOnBases.OperationAddition(first, second);
+            byte[] sum = OperationsOnBases.OperationAddition(first, second, baseNumber);
 
             CollectionAssert.AreEqual(expectedSum, sum);
         }
 
         [TestMethod]
-        public void VerifyAdditionBetweenTwonumbers2()
+        public void VerifyAdditionBetweenTwonumbersTest2()
         {
             byte[] first = new byte[] { 1, 0, 1, 1 };
             byte[] second = new byte[] {  1, 1 };
             byte[] expectedSum = new byte[] { 1, 1, 1, 0 };
+            int baseNumber = 2;
 
-            byte[] sum = OperationsOnBases.OperationAddition(first, second);
+            byte[] sum = OperationsOnBases.OperationAddition(first, second, baseNumber);
+
+            CollectionAssert.AreEqual(expectedSum, sum);
+        }
+
+        [TestMethod]
+        public void VerifyAdditionBetweenTwonumbersTest3()
+        {
+            byte[] first = new byte[] { 1, 7, 3, 1 };
+            byte[] second = new byte[] { 5, 1 };
+            byte[] expectedSum = new byte[] { 2, 0, 0, 2 };
+            int baseNumber = 8;
+
+            byte[] sum = OperationsOnBases.OperationAddition(first, second, baseNumber);
+
+            CollectionAssert.AreEqual(expectedSum, sum);
+        }
+
+        [TestMethod]
+        public void VerifyAdditionBetweenTwonumbersTest4()
+        {
+            byte[] first = new byte[] {7, 0, 6, 1 };
+            byte[] second = new byte[] {7, 1, 1 };
+            byte[] expectedSum = new byte[] { 7, 7, 7, 2 };
+            int baseNumber = 8;
+
+            byte[] sum = OperationsOnBases.OperationAddition(first, second, baseNumber);
 
             CollectionAssert.AreEqual(expectedSum, sum);
         }
@@ -262,8 +301,9 @@ namespace OperationsOnBases.Tests
             byte[] first = new byte[] { 1, 1, 1, 1 };
             byte[] second = new byte[] { 1, 0, 1, 0 };
             byte[] expectedresult = new byte[] { 0, 1, 0, 1 };
+            int baseNumber = 2;
 
-            byte[] result = OperationsOnBases.OperationSubstraction(first, second);
+            byte[] result = OperationsOnBases.OperationSubstraction(first, second, baseNumber);
 
             CollectionAssert.AreEqual(expectedresult, result);
         }
@@ -274,8 +314,9 @@ namespace OperationsOnBases.Tests
             byte[] first = new byte[] { 1, 1, 1, 1, 0 };
             byte[] second = new byte[] { 1, 0, 1, 0 };
             byte[] expectedresult = new byte[] { 1, 0, 1, 0, 0 };
+            int baseNumber = 2;
 
-            byte[] result = OperationsOnBases.OperationSubstraction(first, second);
+            byte[] result = OperationsOnBases.OperationSubstraction(first, second, baseNumber);
 
             CollectionAssert.AreEqual(expectedresult, result);
         }
@@ -286,8 +327,9 @@ namespace OperationsOnBases.Tests
             byte[] first = new byte[] { 1, 1, 0 };
             byte[] second = new byte[] { 1, 1 };
             byte[] expectedResult = new byte[] { 0, 1, 1};
+            int baseNumber = 2;
 
-            byte[] result = OperationsOnBases.OperationSubstraction(first, second);
+            byte[] result = OperationsOnBases.OperationSubstraction(first, second, baseNumber);
 
             CollectionAssert.AreEqual(expectedResult, result);
         }
@@ -298,8 +340,22 @@ namespace OperationsOnBases.Tests
             byte[] first = new byte[] { 1, 0, 0, 0 };
             byte[] second = new byte[] { 1, 0 };
             byte[] expectedResult = new byte[] { 0, 1, 1, 0 };
+            int baseNumber = 2;
 
-            byte[] result = OperationsOnBases.OperationSubstraction(first, second);
+            byte[] result = OperationsOnBases.OperationSubstraction(first, second, baseNumber);
+
+            CollectionAssert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void VerifyOperationSubstractionBetweenTwonumbers5()
+        {
+            byte[] first = new byte[] { 7, 6, 5 };
+            byte[] second = new byte[] { 4, 3 };
+            byte[] expectedResult = new byte[] { 7, 2, 2 };
+            int baseNumber = 8;
+
+            byte[] result = OperationsOnBases.OperationSubstraction(first, second, baseNumber);
 
             CollectionAssert.AreEqual(expectedResult, result);
         }
@@ -310,8 +366,9 @@ namespace OperationsOnBases.Tests
             byte[] first = new byte[] { 1, 1, 1, 1, 0 };
             byte[] second = new byte[] { 1, 0, 1, 0 };
             byte[] expectedResult = new byte[] { 1, 0, 0, 1, 0, 1, 1, 0, 0 };
+            int baseNumber = 2;
 
-            byte[] multiplication = OperationsOnBases.OperationMultiply(first, second);
+            byte[] multiplication = OperationsOnBases.OperationMultiply(first, second, baseNumber);
 
             CollectionAssert.AreEqual(expectedResult, multiplication);
         }
@@ -322,8 +379,9 @@ namespace OperationsOnBases.Tests
             byte[] first = new byte[] { 1, 1, 1};
             byte[] second = new byte[] { 1, 0 };
             byte[] expectedResult = new byte[] {1, 1, 1, 0 };
+            int baseNumber = 2;
 
-            byte[] multiplication = OperationsOnBases.OperationMultiply(first, second);
+            byte[] multiplication = OperationsOnBases.OperationMultiply(first, second, baseNumber);
 
             CollectionAssert.AreEqual(expectedResult, multiplication);
         }
@@ -334,20 +392,48 @@ namespace OperationsOnBases.Tests
             byte[] first = new byte[] { 1, 0, 0, 1 };
             byte[] second = new byte[] { 1, 1 , 0};
             byte[] expectedResult = new byte[] { 1, 1, 0, 1, 1, 0 };
+            int baseNumber = 2;
 
-            byte[] multiplication = OperationsOnBases.OperationMultiply(first, second);
+            byte[] multiplication = OperationsOnBases.OperationMultiply(first, second, baseNumber);
 
             CollectionAssert.AreEqual(expectedResult, multiplication);
         }
 
         [TestMethod]
-        public void VerifyDivisionBetweenTwonumbers()
+        public void VerifyMultiplicationBetweenTwonumbers4()
+        {
+            byte[] first = new byte[] { 7, 2, 5 };
+            byte[] second = new byte[] { 4, 2 };
+            byte[] expectedResult = new byte[] { 3, 7, 1, 1, 2 };
+            int baseNumber = 8;
+
+            byte[] multiplication = OperationsOnBases.OperationMultiply(first, second, baseNumber);
+
+            CollectionAssert.AreEqual(expectedResult, multiplication);
+        }
+
+        [TestMethod]
+        public void VerifyDivisionBetweenTwonumbersTest1()
         {
             byte[] first = new byte[] { 1, 0, 1, 0 };
             byte[] second = new byte[] { 1, 0 };
             byte[] expectedResult = new byte[] { 1, 0, 1 };
+            int baseNumber = 2;
 
-            byte[] division = OperationsOnBases.OperationDivision(first, second);
+            byte[] division = OperationsOnBases.OperationDivision(first, second, baseNumber);
+
+            CollectionAssert.AreEqual(expectedResult, division);
+        }
+
+        [TestMethod]
+        public void VerifyDivisionBetweenTwonumbersTest2()
+        {
+            byte[] first = new byte[] { 7, 2 };
+            byte[] second = new byte[] { 5 };
+            byte[] expectedResult = new byte[] { 1, 3 };
+            int baseNumber = 8;
+
+            byte[] division = OperationsOnBases.OperationDivision(first, second, baseNumber);
 
             CollectionAssert.AreEqual(expectedResult, division);
         }

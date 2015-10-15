@@ -146,7 +146,7 @@ namespace OperationsOnBases
             return ((OperatorLessThan(second, first) == false) && (OperatorLessThan(first, second) == false));
         }
 
-        public static byte[] OperationAddition(byte[] first, byte[] second)
+        public static byte[] OperationAddition(byte[] first, byte[] second, int baseNumber)
         {
             var maxLength = Math.Max(first.Length, second.Length);
             byte[] resultedNumber = new byte[maxLength];
@@ -155,8 +155,8 @@ namespace OperationsOnBases
             for (int i = 0; i < resultedNumber.Length; i++)
             {
                 int sum = (GetElem(first, i) + GetElem(second, i) + reminder);
-                resultedNumber[i] = (byte)(sum % 2);
-                reminder = (byte)(sum / 2);
+                resultedNumber[i] = (byte)(sum % baseNumber);
+                reminder = (byte)(sum / baseNumber);
             }
 
             if (reminder != 0)
@@ -169,7 +169,7 @@ namespace OperationsOnBases
             return resultedNumber;
         }
 
-        public static byte[] OperationSubstraction(byte[] first, byte[] second)
+        public static byte[] OperationSubstraction(byte[] first, byte[] second , int baseNumber)
         {
             var maxLength = Math.Max(first.Length, second.Length);
             byte[] resultedNumber = new byte[maxLength];
@@ -178,36 +178,36 @@ namespace OperationsOnBases
             for (var i = 0; i < maxLength; i++)
             {
                 var difference = GetElem(first, i) - GetElem(second, i) - reminder;
-                var deductResult = (2 + difference) % 2;
+                var deductResult = (baseNumber + difference) % baseNumber;
                 resultedNumber[i] = (byte)deductResult;
-                reminder = (byte)((2 + difference) / 2);
+                reminder = (byte)((baseNumber + difference) / baseNumber);
                 reminder = (byte)(reminder == 0 ? 1 : 0);
             }
             Array.Reverse(resultedNumber);
             return resultedNumber;
         }
 
-        public static byte[] OperationMultiply(byte[] first, byte[] second)
+        public static byte[] OperationMultiply(byte[] first, byte[] second, int baseNumber)
         {
             var resultedNumber = new byte[0];
-            var decimalSecond = ConvertToDecimalNumber(second, 2);
+            var decimalSecond = ConvertToDecimalNumber(second, baseNumber);
 
             for (int i = 1; i <= decimalSecond; i++)
-                resultedNumber = OperationAddition(resultedNumber, first);
+                resultedNumber = OperationAddition(resultedNumber, first, baseNumber);
              
             return resultedNumber;
         }
 
-        public static byte[] OperationDivision(byte[] first, byte[] second)
+        public static byte[] OperationDivision(byte[] first, byte[] second, int baseNumber)
         {
            int resultedNumber = 0;
 
                 while (OperatorGreaterThan(first,second) || OperatorEqual(first,second))
                 {
-                    first = OperationSubstraction(first, second);
+                    first = OperationSubstraction(first, second, baseNumber);
                     resultedNumber++;                    
                 }
-            return ConvertADecimalNumberIntoAnotherBase(resultedNumber,2) ;
+                return ConvertADecimalNumberIntoAnotherBase(resultedNumber, baseNumber);
         }
 
         public static byte GetElem(byte[] array, int i)
