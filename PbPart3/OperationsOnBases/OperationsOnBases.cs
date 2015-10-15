@@ -19,7 +19,6 @@ namespace OperationsOnBases
                 convertedNumber[i++] = (byte)modulo;
                 decimalNumber = decimalNumber / baseNumber;
             }
-
             Array.Resize(ref convertedNumber, i);
             Array.Reverse(convertedNumber);
 
@@ -34,35 +33,30 @@ namespace OperationsOnBases
             {
                 decimalNumber = decimalNumber + number[i] * Math.Pow(baseOfTheNumber, number.Length - i - 1);
             }
-
             return decimalNumber;
         }
 
-        public static byte[] OperatorNot(byte[] binaryNumber)
+        public static byte[] OperatorNot(byte[] number)
         {
-            for (int i = 0; i < binaryNumber.Length; i++)
+            for (int i = 0; i < number.Length; i++)
             {
-                if (binaryNumber[i] == 1)
-                    binaryNumber[i] = 0;
-                else
-                    binaryNumber[i] = 1;
+                number [i] = (number[i] == 1) ? (byte)0: (byte)1;
             }
-
-            return binaryNumber;
+            return number;
         }
 
         public static byte[] OperatorAnd(byte[] first, byte[] second)
         {
             var maxLength = Math.Max(first.Length, second.Length);
-            byte[] resultedBinary = new byte [maxLength];
+            byte[] resultedNumber = new byte [maxLength];
             var index = 0;
 
-            for (int i = 0; i < resultedBinary.Length; i++)
+            for (int i = 0; i < resultedNumber.Length; i++)
             {
-                index = resultedBinary.Length - i - 1;
-                resultedBinary[index] = OperatorAnd(GetElem(first, i), GetElem(second, i));
+                index = resultedNumber.Length - i - 1;
+                resultedNumber[index] = OperatorAnd(GetElem(first, i), GetElem(second, i));
             }
-            return resultedBinary;
+            return resultedNumber;
         }
 
         public static byte OperatorAnd(byte first, byte second)
@@ -73,15 +67,15 @@ namespace OperationsOnBases
         public static byte[] OperatorOR(byte[] first, byte[] second)
         {
             var maxLength = Math.Max(first.Length, second.Length);
-            byte[] resultedBinary = new byte[maxLength];
+            byte[] resultedNumber = new byte[maxLength];
             var index = 0;
 
-            for (int i = 0; i < resultedBinary.Length; i++)
+            for (int i = 0; i < resultedNumber.Length; i++)
             {
-                index = resultedBinary.Length - i - 1;
-                resultedBinary[index] = OperatorOR(GetElem(first, i), GetElem(second, i));
+                index = resultedNumber.Length - i - 1;
+                resultedNumber[index] = OperatorOR(GetElem(first, i), GetElem(second, i));
             }
-            return resultedBinary;
+            return resultedNumber;
         }
 
         public static byte OperatorOR(byte first, byte second)
@@ -92,41 +86,37 @@ namespace OperationsOnBases
         public static byte[] OperatorXOR(byte[] first, byte[] second)
         {
             var maxLength = Math.Max(first.Length, second.Length);
-            byte[] resultedBinary = new byte[maxLength];
+            byte[] resultedNumber = new byte[maxLength];
 
             for (int i = 0; i < first.Length; i++)
             {
-                if (((GetElem(first, i) == 0) & (GetElem(second, i) == 0)) || ((GetElem(first, i) == 1) & (GetElem(second, i) == 1)))
-                    resultedBinary[i] = 0;
-                else
-                    resultedBinary[i] = 1;
+                resultedNumber[i] = (((GetElem(first, i) == 0) & (GetElem(second, i) == 0)) || ((GetElem(first, i) == 1) & (GetElem(second, i) == 1))) ? (byte)0 : (byte)1;
             }
-            Array.Reverse(resultedBinary);
-            return resultedBinary;
+            Array.Reverse(resultedNumber);
+            return resultedNumber;
         }
 
-        public static byte[] OperatorRightHandShift(byte[] binaryNumber, int value)
+        public static byte[] OperatorRightHandShift(byte[] number, int value)
         {
-            var resultedBinaryNumber = new byte[binaryNumber.Length];
+            var resultedNumber = new byte[number.Length];
 
-            for (int i = value; i < binaryNumber.Length; i++)
+            for (int i = value; i < number.Length; i++)
             {
-                resultedBinaryNumber[i] = binaryNumber[i - value];
+                resultedNumber[i] = number[i - value];
             }
-
-            return resultedBinaryNumber;
+            return resultedNumber;
         }
 
-        public static byte[] OperatorLeftHandShift(byte[] binaryNumber, int value)
+        public static byte[] OperatorLeftHandShift(byte[] number, int value)
         {
-            var resultedBinaryNumber = new byte[binaryNumber.Length];
+            var resultedNumber = new byte[number.Length];
 
-            for (int i = 0; i < binaryNumber.Length - value; i++)
+            for (int i = 0; i < number.Length - value; i++)
             {
-                resultedBinaryNumber[i] = binaryNumber[value + i];
+                resultedNumber[i] = number[value + i];
             }
 
-            return resultedBinaryNumber;
+            return resultedNumber;
         }
 
         public static bool OperatorLessThan(byte[] first, byte[] second)
@@ -135,59 +125,66 @@ namespace OperationsOnBases
 
             int maxLength = Math.Max(first.Length, second.Length);
 
-            for (int i = 0; i < maxLength; i++)
+            for (int i = 0; i <maxLength; i++)
             {
-                if (GetElemForLessThan(first, i, maxLength) < GetElemForLessThan(second, i,maxLength))
+                if (GetElemForLessThan(first, i, maxLength) < GetElemForLessThan(second, i,maxLength)) 
                 {
                     FirstNumberIsLess = true;
-                    break;
-                }
-                else
-                {
-                    FirstNumberIsLess = false;
                     break;
                 }
             }
             return FirstNumberIsLess;
         }
 
+        public static bool OperatorGreaterThan(byte[] first, byte[] second)
+        {
+            return (OperatorLessThan(second, first));
+        }
+
+        public static bool OperatorEqual(byte[] first, byte[] second)
+        {
+            return ((OperatorLessThan(second, first) == false) && (OperatorLessThan(first, second) == false));
+        }
+
         public static byte[] OperationAddition(byte[] first, byte[] second)
         {
             var maxLength = Math.Max(first.Length, second.Length);
-            byte[] resultedBinaryNumber = new byte[maxLength];
+            byte[] resultedNumber = new byte[maxLength];
             byte reminder = 0;
 
-            for (int i = 0; i < resultedBinaryNumber.Length; i++)
+            for (int i = 0; i < resultedNumber.Length; i++)
             {
-                resultedBinaryNumber[i] = (byte)((GetElem(first, i) + GetElem(second, i) + reminder) % 2);
-                reminder = (byte)((GetElem(first, i) + GetElem(second, i) + reminder) / 2);
+                int sum = (GetElem(first, i) + GetElem(second, i) + reminder);
+                resultedNumber[i] = (byte)(sum % 2);
+                reminder = (byte)(sum / 2);
             }
 
             if (reminder != 0)
             {
-                Array.Resize(ref resultedBinaryNumber, resultedBinaryNumber.Length + 1);
-                resultedBinaryNumber[resultedBinaryNumber.Length-1] = 1;
+                Array.Resize(ref resultedNumber, resultedNumber.Length + 1);
+                resultedNumber[resultedNumber.Length-1] = 1;
             }
 
-            Array.Reverse(resultedBinaryNumber);
-            return resultedBinaryNumber;
+            Array.Reverse(resultedNumber);
+            return resultedNumber;
         }
 
         public static byte[] OperationSubstraction(byte[] first, byte[] second)
         {
             var maxLength = Math.Max(first.Length, second.Length);
-            byte[] resultedBinaryNumber = new byte[maxLength];
+            byte[] resultedNumber = new byte[maxLength];
             byte reminder = 0;
 
             for (var i = 0; i < maxLength; i++)
             {
-                var deductResult = (2 + GetElem(first, i) - GetElem(second, i) - reminder) % 2;
-                resultedBinaryNumber[i] = (byte)deductResult;
-                reminder = (byte)((2 + GetElem(first, i) - GetElem(second, i) - reminder) / 2);
+                var difference = GetElem(first, i) - GetElem(second, i) - reminder;
+                var deductResult = (2 + difference) % 2;
+                resultedNumber[i] = (byte)deductResult;
+                reminder = (byte)((2 + difference) / 2);
                 reminder = (byte)(reminder == 0 ? 1 : 0);
             }
-            Array.Reverse(resultedBinaryNumber);
-            return resultedBinaryNumber;
+            Array.Reverse(resultedNumber);
+            return resultedNumber;
         }
 
         public static byte[] OperationMultiply(byte[] first, byte[] second)
@@ -203,26 +200,14 @@ namespace OperationsOnBases
 
         public static byte[] OperationDivision(byte[] first, byte[] second)
         {
-            var resultedNumber = 0;
-            
-            if (OperatorLessThan(first,second))
-            {
-                while (ConvertToDecimalNumber(second, 2) >= 0)
-                {
-                    second = OperationSubstraction(second, first);
-                    resultedNumber++;                    
-                }
-            }
-            else
-            {
-                while (ConvertToDecimalNumber(first, 2) > 0)
+           int resultedNumber = 0;
+
+                while (OperatorGreaterThan(first,second) || OperatorEqual(first,second))
                 {
                     first = OperationSubstraction(first, second);
-                    resultedNumber++;
+                    resultedNumber++;                    
                 }
-            }
-
-            return ConvertADecimalNumberIntoAnotherBase(resultedNumber,2);
+            return ConvertADecimalNumberIntoAnotherBase(resultedNumber,2) ;
         }
 
         public static byte GetElem(byte[] array, int i)
@@ -236,7 +221,7 @@ namespace OperationsOnBases
         public static byte GetElemForLessThan(byte[] array, int i, int maxLength)
         {
             if (i >= maxLength - array.Length)
-                return array[i - (maxLength - array.Length - 1)];
+                return array[i - (maxLength-array.Length)];
             else
                 return 0;
         }
