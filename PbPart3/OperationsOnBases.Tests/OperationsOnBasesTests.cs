@@ -20,6 +20,42 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
+        public void VerifyTransformationOfaNumberFromADifferentBaseIntoDecimal()
+        {
+            byte[] number = { 1, 1, 1 };
+            int baseNumber = 2;
+            double expectedNumber = 7;
+
+            double decimalNumber = OperationsOnBases.ConvertToDecimalNumber(number, baseNumber);
+
+            Assert.AreEqual(expectedNumber, decimalNumber);
+        }
+
+        [TestMethod]
+        public void VerifyTransformationOfaNumberFromADifferentBaseIntoDecimal2()
+        {
+            byte[] number = { 1, 1};
+            int baseNumber = 2;
+            double expectedNumber = 3;
+
+            double decimalNumber = OperationsOnBases.ConvertToDecimalNumber(number, baseNumber);
+
+            Assert.AreEqual(expectedNumber, decimalNumber);
+        }
+
+        [TestMethod]
+        public void VerifyTransformationOfaNumberFromADifferentBaseIntoDecimal3()
+        {
+            byte[] number = { 1, 0 };
+            int baseNumber = 2;
+            double expectedNumber = 2;
+
+            double decimalNumber = OperationsOnBases.ConvertToDecimalNumber(number, baseNumber);
+
+            Assert.AreEqual(expectedNumber, decimalNumber);
+        }
+
+        [TestMethod]
         public void VerifyBitwiseNOToperatorForABinaryNumber()
         {
             byte[] binaryNumber = new byte[] { 1, 0, 0, 1, 1 };
@@ -161,15 +197,111 @@ namespace OperationsOnBases.Tests
         }
 
         [TestMethod]
-        public void VerifySubstractionBetweenTwoBinaryNumbers()
+        public void VerifyAdditionBetweenTwoBinaryNumbers2()
         {
             byte[] first = new byte[] { 1, 0, 1, 1 };
-            byte[] second = new byte[] { 1, 0, 1, 1 };
-            byte[] expectedSum = new byte[] { 0, 0, 0, 0 };
+            byte[] second = new byte[] {  1, 1 };
+            byte[] expectedSum = new byte[] { 1, 1, 1, 0 };
 
-            byte[] sum = OperationsOnBases.OperationSubstraction(first, second);
+            byte[] sum = OperationsOnBases.OperationAddition(first, second);
 
-            Assert.AreEqual(expectedSum, sum);
+            CollectionAssert.AreEqual(expectedSum, sum);
+        }
+
+        [TestMethod]
+        public void VerifySubstractionBetweenTwoBinaryNumbers()
+        {
+            byte[] first = new byte[] { 1, 1, 1, 1 };
+            byte[] second = new byte[] { 1, 0, 1, 0 };
+            byte[] expectedresult = new byte[] { 0, 1, 0, 1 };
+
+            byte[] result = OperationsOnBases.OperationSubstraction(first, second);
+
+            CollectionAssert.AreEqual(expectedresult, result);
+        }
+
+        [TestMethod]
+        public void VerifySubstractionBetweenTwoBinaryNumbers2()
+        {
+            byte[] first = new byte[] { 1, 1, 1, 1, 0 };
+            byte[] second = new byte[] { 1, 0, 1, 0 };
+            byte[] expectedresult = new byte[] { 1, 0, 1, 0, 0 };
+
+            byte[] result = OperationsOnBases.OperationSubstraction(first, second);
+
+            CollectionAssert.AreEqual(expectedresult, result);
+        }
+
+        [TestMethod]
+        public void VerifyOperationSubstractionBetweenTwoBinaryNumbers3()
+        {
+            byte[] first = new byte[] { 1, 1, 0 };
+            byte[] second = new byte[] { 1, 1 };
+            byte[] expectedResult = new byte[] { 0, 1, 1};
+
+            byte[] result = OperationsOnBases.OperationSubstraction(first, second);
+
+            CollectionAssert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void VerifyOperationSubstractionBetweenTwoBinaryNumbers4()
+        {
+            byte[] first = new byte[] { 1, 0, 0, 0 };
+            byte[] second = new byte[] { 1, 0 };
+            byte[] expectedResult = new byte[] { 0, 1, 1, 0 };
+
+            byte[] result = OperationsOnBases.OperationSubstraction(first, second);
+
+            CollectionAssert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void VerifyMultiplicationBetweenTwoBinaryNumbers()
+        {
+            byte[] first = new byte[] { 1, 1, 1, 1, 0 };
+            byte[] second = new byte[] { 1, 0, 1, 0 };
+            byte[] expectedResult = new byte[] { 1, 0, 0, 1, 0, 1, 1, 0, 0 };
+
+            byte[] multiplication = OperationsOnBases.OperationMultiply(first, second);
+
+            CollectionAssert.AreEqual(expectedResult, multiplication);
+        }
+
+        [TestMethod]
+        public void VerifyMultiplicationBetweenTwoBinaryNumbers2()
+        {
+            byte[] first = new byte[] { 1, 1, 1};
+            byte[] second = new byte[] { 1, 0 };
+            byte[] expectedResult = new byte[] {1, 1, 1, 0 };
+
+            byte[] multiplication = OperationsOnBases.OperationMultiply(first, second);
+
+            CollectionAssert.AreEqual(expectedResult, multiplication);
+        }
+
+        [TestMethod]
+        public void VerifyMultiplicationBetweenTwoBinaryNumbers3()
+        {
+            byte[] first = new byte[] { 1, 0, 0, 1 };
+            byte[] second = new byte[] { 1, 1 , 0};
+            byte[] expectedResult = new byte[] { 1, 1, 0, 1, 1, 0 };
+
+            byte[] multiplication = OperationsOnBases.OperationMultiply(first, second);
+
+            CollectionAssert.AreEqual(expectedResult, multiplication);
+        }
+
+        [TestMethod]
+        public void VerifyDivisionBetweenTwoBinaryNumbers()
+        {
+            byte[] first = new byte[] { 1, 0, 1, 0 };
+            byte[] second = new byte[] { 1, 0 };
+            byte[] expectedResult = new byte[] { 1, 0, 1 };
+
+            byte[] division = OperationsOnBases.OperationDivision(first, second);
+
+            CollectionAssert.AreEqual(expectedResult, division);
         }
     }
 }

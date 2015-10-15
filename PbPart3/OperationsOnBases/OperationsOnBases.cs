@@ -26,6 +26,18 @@ namespace OperationsOnBases
             return convertedNumber;
         }
 
+        public static double ConvertToDecimalNumber(byte[] number, int baseOfTheNumber)
+        {
+            double decimalNumber = 0;
+
+            for (int i = 0; i < number.Length; i++)
+            {
+                decimalNumber = decimalNumber + number[i] * Math.Pow(baseOfTheNumber, number.Length - i - 1);
+            }
+
+            return decimalNumber;
+        }
+
         public static byte[] OperatorNot(byte[] binaryNumber)
         {
             for (int i = 0; i < binaryNumber.Length; i++)
@@ -147,37 +159,11 @@ namespace OperationsOnBases
 
             for (int i = 0; i < resultedBinaryNumber.Length; i++)
             {
-                if ((GetElem(first, i) + (GetElem(second, i)) >= 2) & (reminder == 0))
-                {
-                    resultedBinaryNumber[i] = 0;
-                    reminder = 1;
-                }
-                else
-                    if ((GetElem(first, i) + (GetElem(second, i)) >= 2) & (reminder == 1))
-                    {
-                        resultedBinaryNumber[i] = 1;
-                        reminder = 1;
-                    }
-                    else
-                        if ((GetElem(first, i) + (GetElem(second, i)) < 2) & (reminder == 0))
-                        resultedBinaryNumber[i] = (byte)(GetElem(first, i) + GetElem(second, i));
-                        else 
-                             if ((GetElem(first, i) + (GetElem(second, i)) < 2) & (reminder == 1))
-                             {
-                                 if ((GetElem(first, i) + GetElem(second, i) + reminder) >= 2)
-                                 {
-                                     resultedBinaryNumber[i] = 0;
-                                     reminder = 1;
-                                 }
-                                 else
-                                 {
-                                     resultedBinaryNumber[i] = (byte)(GetElem(first, i) + GetElem(second, i) + reminder);
-                                     reminder = 0;
-                                 }
-                             }
+                resultedBinaryNumber[i] = (byte)((GetElem(first, i) + GetElem(second, i) + reminder) % 2);
+                reminder = (byte)((GetElem(first, i) + GetElem(second, i) + reminder) / 2);
             }
 
-            if (reminder == 1)
+            if (reminder != 0)
             {
                 Array.Resize(ref resultedBinaryNumber, resultedBinaryNumber.Length + 1);
                 resultedBinaryNumber[resultedBinaryNumber.Length-1] = 1;
@@ -191,8 +177,52 @@ namespace OperationsOnBases
         {
             var maxLength = Math.Max(first.Length, second.Length);
             byte[] resultedBinaryNumber = new byte[maxLength];
+            byte reminder = 0;
 
+            for (var i = 0; i < maxLength; i++)
+            {
+                var deductResult = (2 + GetElem(first, i) - GetElem(second, i) - reminder) % 2;
+                resultedBinaryNumber[i] = (byte)deductResult;
+                reminder = (byte)((2 + GetElem(first, i) - GetElem(second, i) - reminder) / 2);
+                reminder = (byte)(reminder == 0 ? 1 : 0);
+            }
+            Array.Reverse(resultedBinaryNumber);
             return resultedBinaryNumber;
+        }
+
+        public static byte[] OperationMultiply(byte[] first, byte[] second)
+        {
+            var resultedNumber = new byte[0];
+            var decimalSecond = ConvertToDecimalNumber(second, 2);
+
+            for (int i = 1; i <= decimalSecond; i++)
+                resultedNumber = OperationAddition(resultedNumber, first);
+             
+            return resultedNumber;
+        }
+
+        public static byte[] OperationDivision(byte[] first, byte[] second)
+        {
+            var resultedNumber = 0;
+            
+            if (OperatorLessThan(first,second))
+            {
+                while (ConvertToDecimalNumber(second, 2) >= 0)
+                {
+                    second = OperationSubstraction(second, first);
+                    resultedNumber++;                    
+                }
+            }
+            else
+            {
+                while (ConvertToDecimalNumber(first, 2) > 0)
+                {
+                    first = OperationSubstraction(first, second);
+                    resultedNumber++;
+                }
+            }
+
+            return ConvertADecimalNumberIntoAnotherBase(resultedNumber,2);
         }
 
         public static byte GetElem(byte[] array, int i)
