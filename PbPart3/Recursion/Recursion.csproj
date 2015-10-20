@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FC2788DE-BF1E-4843-A6EB-906B93A0D2BA}</ProjectGuid>
+    <ProjectGuid>{F7C0AFBD-640D-4CFC-ABEB-7F14F5492AC7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Recursion</RootNamespace>

@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Recursion;
 
 namespace Recursion.Tests
 {
@@ -34,10 +33,10 @@ namespace Recursion.Tests
         {
             string firstString = "A";
             string secondString = "pere";
-            int indexOfChar = 9;
+            char characterToBeReplaced = 'A';
             string expectedString = "pere";
 
-            string resultedString = Recursion.ReplaceACharWithAString(indexOfChar, firstString, secondString);
+            string resultedString = Recursion.ReplaceACharWithAString(characterToBeReplaced, firstString,  secondString);
 
             Assert.AreEqual(expectedString, resultedString);
         }
@@ -46,13 +45,40 @@ namespace Recursion.Tests
         public void Verify_The_Replacement_Of_A_Character_From_A_String_With_Another_String_ANA_ARE_MERE()
         {
             string firstString = "ana are mere";
-            string secondString = "pere";
-            int indexOfChar = 9;
-            string expectedString = "ana are pereere";
+            string secondString = "xyz";
+            char characterToBeReplaced = 'a';
+            string expectedString = "xyznxyz xyzre mere";
 
-            string resultedString = Recursion.ReplaceACharWithAString(indexOfChar, firstString, secondString);
+            string resultedString = Recursion.ReplaceACharWithAString(characterToBeReplaced, firstString,  secondString);
 
             Assert.AreEqual(expectedString, resultedString);
         }
-    }
+
+        [TestMethod]
+        public void Verify_Operation1_On_Calculator()
+        {
+            string[] input = new string[] { "+", "3", "4" };
+            double expectedResult = 7;
+            var index = 0;
+
+            double result = Recursion.Calculator(input, ref index );
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void Verify_Operation2_On_Calculator()
+        {
+            string[] input = new string [] {"*","/","*","+","56","45","45","3","0.75"};
+            double expectedResult = 1136.25;
+            var index = 0;
+
+            double result = Recursion.Calculator(input,ref index);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+       
+     }
 }
+ 

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{39676E3C-603C-45F3-849F-B7CD490B6F94}</ProjectGuid>
+    <ProjectGuid>{192809B0-F837-460A-A1EB-5638ED02902F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Recursion.Tests</RootNamespace>
@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Recursion\Recursion.csproj">
-      <Project>{fc2788de-bf1e-4843-a6eb-906b93a0d2ba}</Project>
+      <Project>{f7c0afbd-640d-4cfc-abeb-7f14f5492ac7}</Project>
       <Name>Recursion</Name>
     </ProjectReference>
   </ItemGroup>
