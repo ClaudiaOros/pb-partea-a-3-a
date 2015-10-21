@@ -18,52 +18,59 @@ namespace Recursion
 
         public static string ReplaceACharWithAString(char charToBeReplaced, string a, string b)
         {
-            if (String.IsNullOrEmpty(a)) 
+            if (String.IsNullOrEmpty(a))
                 return a;
-            else
-                    if (a[0] == charToBeReplaced)
-                        return b + ReplaceACharWithAString(charToBeReplaced, a.Substring(1, a.Length - 1),  b);
-                    else return a[0] + ReplaceACharWithAString(charToBeReplaced, a.Substring(1, a.Length - 1),  b);
+
+            if (a[0] == charToBeReplaced)
+                return b + ReplaceACharWithAString(charToBeReplaced, a.Substring(1, a.Length - 1), b);
+            return a[0] + ReplaceACharWithAString(charToBeReplaced, a.Substring(1, a.Length - 1), b);
         }
 
-        public static double Calculator(string[] input,ref int index)
+        public static double Calculator(string[] input, ref int index)
         {
             double result;
 
-                if (!double.TryParse(input[index],out result))
-                {
-                    var operators = input[index];
-                    index++;
+            if (!double.TryParse(input[index], out result))
+            {
+                var operators = input[index];
+                index++;
 
-                    var operand1 = Calculator(input, ref index);
-                    var operand2 = Calculator(input, ref index);
+                var operand1 = Calculator(input, ref index);
+                var operand2 = Calculator(input, ref index);
 
-                    switch (operators)
-                    {
-                        case "+":
-                            return operand1 + operand2;
-                        case "-":
-                            return operand1 - operand2;
-                        case "*":
-                            return operand1 * operand2;
-                        case "/":
-                            return operand1 / operand2;
-                    }
-                }
+                return Compute(operators, operand1, operand2);
+            }
 
-                    var nr = double.Parse(input[index]);
-                    index++;
-                    return nr;                                        
-       }
+            var nr = double.Parse(input[index]);
+            index++;
+            return nr;
+        }
 
-        public static ulong HanoiTowers(int disk, string source, string dest, string aux, ref ulong moves)
+        public static double Compute(string @operator, double operand1, double operand2)
         {
-            if (disk == 0)                     
-                return moves;            
-            
-            HanoiTowers(disk - 1, source, aux, dest, ref moves);
+            switch (@operator)
+            {
+                case "+":
+                    return operand1 + operand2;
+                case "-":
+                    return operand1 - operand2;
+                case "*":
+                    return operand1 * operand2;
+                case "/":
+                    return operand1 / operand2;           
+            }
+
+            return 0;
+        }
+
+        public static ulong HanoiTowers(int disk, ref ulong moves)
+        {
+            if (disk == 0)
+                return moves;
+
+            HanoiTowers(disk - 1, ref moves);
             moves++;
-            HanoiTowers(disk - 1, aux, dest, source, ref moves);
+            HanoiTowers(disk - 1, ref moves);
 
             return moves;
         }
@@ -79,6 +86,6 @@ namespace Recursion
             else
                 return (Pascal(row - 1, column - 1) + Pascal(row - 1, column));
         }
-        
+
     }
 }

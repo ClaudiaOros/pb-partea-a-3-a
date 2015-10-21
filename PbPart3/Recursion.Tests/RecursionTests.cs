@@ -84,7 +84,7 @@ namespace Recursion.Tests
             ulong expectedMoves = 511;
             ulong moves = 0;
 
-            ulong hanoiMoves = Recursion.HanoiTowers(9, "1", "2", "3", ref moves);
+            ulong hanoiMoves = Recursion.HanoiTowers(9, ref moves);
 
             Assert.AreEqual(expectedMoves, hanoiMoves);
         }
@@ -93,10 +93,10 @@ namespace Recursion.Tests
         [TestMethod]
         public void Verify_Hanoi_Towers_64_disks()
         {
-            ulong expectedMoves = 5;
+            ulong expectedMoves = 18446744073709551615 ;
             ulong moves = 0;
 
-            ulong hanoiMoves = Recursion.HanoiTowers(64, "1", "2", "3", ref moves);
+            ulong hanoiMoves = Recursion.HanoiTowers(64, ref moves);
 
             Assert.AreEqual(expectedMoves, hanoiMoves);
         }
