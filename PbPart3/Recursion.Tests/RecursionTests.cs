@@ -78,6 +78,53 @@ namespace Recursion.Tests
             Assert.AreEqual(expectedResult, result);
         }
 
+        [TestMethod]
+        public void Verify_Hanoi_Towers_4_disks()
+        {
+            ulong expectedMoves = 511;
+            ulong moves = 0;
+
+            ulong hanoiMoves = Recursion.HanoiTowers(9, "1", "2", "3", ref moves);
+
+            Assert.AreEqual(expectedMoves, hanoiMoves);
+        }
+
+        [Ignore]
+        [TestMethod]
+        public void Verify_Hanoi_Towers_64_disks()
+        {
+            ulong expectedMoves = 5;
+            ulong moves = 0;
+
+            ulong hanoiMoves = Recursion.HanoiTowers(64, "1", "2", "3", ref moves);
+
+            Assert.AreEqual(expectedMoves, hanoiMoves);
+        }
+
+        [TestMethod]
+        public void Verify_Pascal_Triangle_For_Level4()
+        {
+            int row = 4;
+            int column = 3;
+            int expectedPascalValue = 3;
+
+            int pascalValue = Recursion.Pascal(row, column);
+
+            Assert.AreEqual(expectedPascalValue, pascalValue);
+        }
+
+        [TestMethod]
+        public void Verify_Pascal_Triangle_For_Level6()
+        {
+            int row = 6;
+            int column = 3;
+            int expectedPascalValue = 10;
+
+            int pascalValue = Recursion.Pascal(row, column);
+
+            Assert.AreEqual(expectedPascalValue, pascalValue);
+        }
+
        
      }
 }

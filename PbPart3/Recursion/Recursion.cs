@@ -54,7 +54,31 @@ namespace Recursion
                     var nr = double.Parse(input[index]);
                     index++;
                     return nr;                                        
-       }       
+       }
+
+        public static ulong HanoiTowers(int disk, string source, string dest, string aux, ref ulong moves)
+        {
+            if (disk == 0)                     
+                return moves;            
+            
+            HanoiTowers(disk - 1, source, aux, dest, ref moves);
+            moves++;
+            HanoiTowers(disk - 1, aux, dest, source, ref moves);
+
+            return moves;
+        }
+
+        public static int Pascal(int row, int column)
+        {
+            if (column == 0)
+                return 0;
+            else if (row == 1 && column == 1)
+                return 1;
+            else if (column > row)
+                return 0;
+            else
+                return (Pascal(row - 1, column - 1) + Pascal(row - 1, column));
+        }
         
     }
 }
