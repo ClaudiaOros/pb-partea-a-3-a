@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recursion", "Recursion\Recu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recursion.Tests", "Recursion.Tests\Recursion.Tests.csproj", "{192809B0-F837-460A-A1EB-5638ED02902F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Play", "Play\Play.csproj", "{BD5F61BC-8CCA-4B86-84DD-35B50E8E2FAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Play.Tests", "Play.Tests\Play.Tests.csproj", "{EE4B5AD6-2E6F-4B6C-B5DC-6116704C6DF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{192809B0-F837-460A-A1EB-5638ED02902F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{192809B0-F837-460A-A1EB-5638ED02902F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{192809B0-F837-460A-A1EB-5638ED02902F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD5F61BC-8CCA-4B86-84DD-35B50E8E2FAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD5F61BC-8CCA-4B86-84DD-35B50E8E2FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD5F61BC-8CCA-4B86-84DD-35B50E8E2FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD5F61BC-8CCA-4B86-84DD-35B50E8E2FAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE4B5AD6-2E6F-4B6C-B5DC-6116704C6DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE4B5AD6-2E6F-4B6C-B5DC-6116704C6DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE4B5AD6-2E6F-4B6C-B5DC-6116704C6DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE4B5AD6-2E6F-4B6C-B5DC-6116704C6DF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
