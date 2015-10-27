@@ -19,11 +19,11 @@ namespace SortingAndSearching
         {
             public string reparation;
             public Priority priority;
-            
+
         }
 
         public static string[] Quicksort(string[] text, int left, int right)
-        { 
+        {
             int i = left, j = right;
             string pivot = text[(left + right) / 2];
 
@@ -76,7 +76,7 @@ namespace SortingAndSearching
 
         public static int[] InsertionSortingAlgorithm(int[] array)
         {
-            int temp,j;
+            int temp, j;
             for (int i = 1; i < array.Length; i++)
             {
                 temp = array[i];
@@ -106,7 +106,7 @@ namespace SortingAndSearching
                     if (repairs[j].priority < repairs[min].priority)
                         min = j;
 
-               temp = SwapValues(repairs, min, i);
+                temp = SwapValues(repairs, min, i);
             }
 
             return repairs;
@@ -114,15 +114,15 @@ namespace SortingAndSearching
 
         private static Reparation SwapValues(Reparation[] repairs, int min, int i)
         {
-                Reparation temp;
-               
-                temp = repairs[i];
-                repairs[i] = repairs[min];
-                repairs[min] = temp;
-                return temp;
+            Reparation temp;
+
+            temp = repairs[i];
+            repairs[i] = repairs[min];
+            repairs[min] = temp;
+            return temp;
         }
 
-        
+
         public static void Swap(string[] array, int a, int b)
         {
             string temp = array[a];
@@ -132,48 +132,85 @@ namespace SortingAndSearching
 
         public static string[] QuickSort3Algorithm(string[] text, int left, int right)
         {
- 
-            // choose pivot
-                string pivot = text[(left + right) / 2];
 
             // 3-way partition
-              int i = 1;
-              int k = 1;
-              int n = text.Length;
-              int p = n;
+            int i = 1;
+            int k = 1;
+            int n = text.Length-1;
+            int p = n;
 
+            while (i < p)
+            {
+                if (IsLessThan(text[i], text[n]))
+                    Swap(text, i++, k++);
+                else
+                    if (text[i] == text[n])
+                        Swap(text, i, p--);
+                    else
+                        i++;
+            }
 
-            //    while (i < p)
-            //    {
-            //     if ( (int)text[i] < (int)text[n])
-            //        Swap(text,i++,k++);                 
-            //     else 
-            //         if (text[i] == text[n])                         
-            //             Swap(text,i,p--);                   
-            //     else 
-            //             i++;
-            //    }
-
-
-            //// move pivots to center
-            //   int m = GetMinValue(p-k,n-p+1);
-            //    Swap a[k..k+m-1,n-m+1..n]
+            // move pivots to center
+            int m = GetMinValue(p - k, n - p + 1);
+            SwapMore(text,k, k + m - 1, n - m + 1, n);
 
             // recursive sorts
-            
-            QuickSort3Algorithm(text,1,k-1);
 
-           QuickSort3Algorithm(text,n-p+k+1,n);
+            QuickSort3Algorithm(text, 1, k - 1);
+
+            QuickSort3Algorithm(text, n - p + k + 1, n);
 
             return text;
 
         }
 
-        public static int GetMinValue(int a, int b)
+        public static void SwapMore(string[] text, int xStart, int xEnd, int yStart, int yEnd)
         {
-            return  a < b ? a:b;
-
+            while (xEnd >= xStart)
+            {
+                var temp = text[yStart];
+                text[yStart] = text[xStart];
+                text[xStart] = temp;
+                xStart++;
+                yStart++;
+            }
         }
 
+        public static int GetMinValue(int a, int b)
+        {
+            return a < b ? a : b;
+        }
+
+        public static bool IsLessThan(string a, string b)
+        {
+            bool isLess = true;
+
+            if (a.Length != b.Length)            
+                SetSameLengthForTwoStrings(a, b);
+            
+
+            for (int i = 0; i < a.Length; i++)
+
+                if (a[i] > b[i])
+                {
+                    isLess = false;
+                    break;
+                }
+            return isLess;
+        }
+
+        public static void SetSameLengthForTwoStrings(string a, string b)
+        {
+            int m = a.Length;
+            int n = b.Length;
+
+            if (a.Length > b.Length)
+                for (int i = b.Length + 1; i <= a.Length; i++)
+                    b = b + "0";
+            else
+                if (b.Length > a.Length)
+                    for (int i = b.Length + 1; i <= a.Length; i++)
+                        a = a + "0";
+        }
     }
 }

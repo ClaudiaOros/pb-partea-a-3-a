@@ -117,6 +117,17 @@ namespace SortingAndTesting.Tests
 
             CollectionAssert.AreEqual(expectedReparationsOrderedByPriority, reparationsOrderedByPriority);
         }
+
+        [TestMethod]
+        public void Order_words()
+        {
+            string[] text = {"ana","are","mere","mere","mere","pere","cirese","ana" };
+            string[] expectedText = {"ana","ana","are","cirese","mere","mere","mere","pere" };
+
+            string[] orderedText = SortingAndSearching.SortingAndSearching.QuickSort3Algorithm(text, 0, text.Length - 1);
+
+            CollectionAssert.AreEqual(expectedText, orderedText);
+        }
         
     }
 }
