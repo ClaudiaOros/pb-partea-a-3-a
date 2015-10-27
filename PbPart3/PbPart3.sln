@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Play", "Play\Play.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Play.Tests", "Play.Tests\Play.Tests.csproj", "{EE4B5AD6-2E6F-4B6C-B5DC-6116704C6DF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortingAndSearching", "SortingAndSearching\SortingAndSearching.csproj", "{2CB420B0-45C1-4BD1-B586-6A26FE84CBC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortingAndTesting.Tests", "SortingAndTesting.Tests\SortingAndTesting.Tests.csproj", "{6567D917-C10C-45BD-83A2-12AC5DD408EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +97,14 @@ Global
 		{EE4B5AD6-2E6F-4B6C-B5DC-6116704C6DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE4B5AD6-2E6F-4B6C-B5DC-6116704C6DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE4B5AD6-2E6F-4B6C-B5DC-6116704C6DF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB420B0-45C1-4BD1-B586-6A26FE84CBC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB420B0-45C1-4BD1-B586-6A26FE84CBC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB420B0-45C1-4BD1-B586-6A26FE84CBC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB420B0-45C1-4BD1-B586-6A26FE84CBC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6567D917-C10C-45BD-83A2-12AC5DD408EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6567D917-C10C-45BD-83A2-12AC5DD408EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6567D917-C10C-45BD-83A2-12AC5DD408EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6567D917-C10C-45BD-83A2-12AC5DD408EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
