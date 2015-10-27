@@ -186,7 +186,7 @@ namespace SortingAndSearching
             bool isLess = true;
 
             if (a.Length != b.Length)            
-                SetSameLengthForTwoStrings(a, b);
+                SetSameLengthForTwoStrings(ref a, ref b);
             
 
             for (int i = 0; i < a.Length; i++)
@@ -199,17 +199,15 @@ namespace SortingAndSearching
             return isLess;
         }
 
-        public static void SetSameLengthForTwoStrings(string a, string b)
+        public static void SetSameLengthForTwoStrings(ref string  a, ref string b)
         {
-            int m = a.Length;
-            int n = b.Length;
-
+          
             if (a.Length > b.Length)
-                for (int i = b.Length + 1; i <= a.Length; i++)
+                for (int i = b.Length ; i < a.Length; i++)
                     b = b + "0";
             else
                 if (b.Length > a.Length)
-                    for (int i = b.Length + 1; i <= a.Length; i++)
+                    for (int i = a.Length ; i < b.Length; i++)
                         a = a + "0";
         }
     }

@@ -128,6 +128,39 @@ namespace SortingAndTesting.Tests
 
             CollectionAssert.AreEqual(expectedText, orderedText);
         }
-        
+
+        [TestMethod]
+        public void Compare_Two_Strings1()
+        {
+            string s1 = "cuvant";
+            string s2 = "cuvantmmmm";
+
+            bool isfirstless = SortingAndSearching.SortingAndSearching.IsLessThan(s1, s2);
+
+            Assert.AreEqual(true, isfirstless);
+        }
+
+        [TestMethod]
+        public void Compare_Two_Strings2()
+        {
+            string s1 = "cuvantfgffg";
+            string s2 = "cuvant";
+
+            bool isfirstless = SortingAndSearching.SortingAndSearching.IsLessThan(s1, s2);
+
+            Assert.AreEqual(false, isfirstless);
+        }
+
+        [TestMethod]
+        public void Compare_Two_Strings3()
+        {
+            string s1 = "mere";
+            string s2 = "ana";
+
+            bool isfirstless = SortingAndSearching.SortingAndSearching.IsLessThan(s1, s2);
+
+            Assert.AreEqual(false, isfirstless);
+        }
+
     }
 }
