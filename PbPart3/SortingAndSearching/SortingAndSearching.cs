@@ -15,11 +15,30 @@ namespace SortingAndSearching
             high
         };
 
+        public enum Candidates
+        {
+            Iohannis,
+            Ponta,
+            Macovei ,
+            Tariceanu 
+        };
+
         public struct Reparation
         {
             public string reparation;
             public Priority priority;
 
+        }
+
+        public struct Elections
+        {
+            public Candidates candidates;
+            public int votes;
+        }
+
+        public struct Polls
+        {
+            public Elections[] elections;
         }
 
         public static string[] Quicksort(string[] text, int left, int right)
@@ -112,6 +131,23 @@ namespace SortingAndSearching
             return repairs;
         }
 
+        public static string[] SelectionSortingAlgorithm(string[] text)
+        {
+            int min;
+
+            for (int i = 0; i < text.Length - 1; i++)
+            {
+                min = i;
+                for (int j = i + 1; j < text.Length; j++)
+                    if ( IsLessThan(text[j] , text[min]))
+                        min = j;
+
+                Swap (text, min, i);
+            }
+
+            return text;
+        }
+
         private static Reparation SwapValues(Reparation[] repairs, int min, int i)
         {
             Reparation temp;
@@ -132,17 +168,19 @@ namespace SortingAndSearching
 
         public static string[] QuickSort3Algorithm(string[] text, int left, int right)
         {
+            Swap(text, text.Length - 1, (left + right) / 2);
 
             // 3-way partition
-            int i = 1;
-            int k = 1;
-            int n = text.Length-1;
+            int i = left;
+            int k = left;
+            int n = right;
             int p = n;
+            
 
             while (i < p)
             {
                 if (IsLessThan(text[i], text[n]))
-                    Swap(text, i++, k++);
+                { Swap(text, i++, k++); }
                 else
                     if (text[i] == text[n])
                         Swap(text, i, p--);
@@ -183,19 +221,31 @@ namespace SortingAndSearching
 
         public static bool IsLessThan(string a, string b)
         {
-            bool isLess = true;
+            bool isLess = false;
 
             if (a.Length != b.Length)            
                 SetSameLengthForTwoStrings(ref a, ref b);
-            
+            bool equal = false;
 
             for (int i = 0; i < a.Length; i++)
-
-                if (a[i] > b[i])
+            {
+                if (a[i] == b[i])            
+                 equal = true;
+            
+                else 
+                   if (a[i] > b[i])
                 {
                     isLess = false;
                     break;
                 }
+                else
+                    if (a[i] < b[i])
+                    {
+                        isLess = true;
+                        break;
+                    }
+
+            }
             return isLess;
         }
 
@@ -209,6 +259,14 @@ namespace SortingAndSearching
                 if (b.Length > a.Length)
                     for (int i = a.Length ; i < b.Length; i++)
                         a = a + "0";
+        }
+
+        public static Candidates GetWinner(Polls polls)
+        {
+            Candidates candidat = Candidates.Iohannis;
+
+
+            return candidat;
         }
     }
 }

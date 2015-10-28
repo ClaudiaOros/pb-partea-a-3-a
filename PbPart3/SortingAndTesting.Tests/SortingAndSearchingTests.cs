@@ -121,10 +121,10 @@ namespace SortingAndTesting.Tests
         [TestMethod]
         public void Order_words()
         {
-            string[] text = {"ana","are","mere","mere","mere","pere","cirese","ana" };
+            string[] text = {"ana","are","mere","mere","mere","pere","ana","cirese" };
             string[] expectedText = {"ana","ana","are","cirese","mere","mere","mere","pere" };
 
-            string[] orderedText = SortingAndSearching.SortingAndSearching.QuickSort3Algorithm(text, 0, text.Length - 1);
+            string[] orderedText = SortingAndSearching.SortingAndSearching.SelectionSortingAlgorithm(text);
 
             CollectionAssert.AreEqual(expectedText, orderedText);
         }
@@ -154,12 +154,128 @@ namespace SortingAndTesting.Tests
         [TestMethod]
         public void Compare_Two_Strings3()
         {
-            string s1 = "mere";
-            string s2 = "ana";
+            string s1 = "ana";
+            string s2 = "cirese";
 
             bool isfirstless = SortingAndSearching.SortingAndSearching.IsLessThan(s1, s2);
 
-            Assert.AreEqual(false, isfirstless);
+            Assert.AreEqual(true, isfirstless);
+        }
+
+        [TestMethod]
+        public void Verify_Who_Won_THe_Elections()
+        {
+
+            var clujPoll = new SortingAndSearching.SortingAndSearching.Polls
+            {
+                elections = new SortingAndSearching.SortingAndSearching.Elections[]
+                { 
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Iohannis,
+                   votes = 10
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Macovei,
+                   votes = 9
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Ponta,
+                   votes = 8
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Tariceanu,
+                   votes = 7
+                    }
+                }
+            };
+
+            var timisPoll = new SortingAndSearching.SortingAndSearching.Polls
+            {
+                elections = new SortingAndSearching.SortingAndSearching.Elections[]
+                { 
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Iohannis,
+                   votes = 11
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Macovei,
+                   votes = 4
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Ponta,
+                   votes = 3
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Tariceanu,
+                   votes = 2
+                    }
+                }
+            };
+
+            var albaPoll = new SortingAndSearching.SortingAndSearching.Polls
+            {
+                elections = new SortingAndSearching.SortingAndSearching.Elections[]
+                { 
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Iohannis,
+                   votes = 13
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Macovei,
+                   votes = 6
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Ponta,
+                   votes = 5
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+
+                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Tariceanu,
+                   votes = 1
+                    }
+                }
+            };
+
+            SortingAndSearching.SortingAndSearching.Polls[] polls = new SortingAndSearching.SortingAndSearching.Polls[] 
+            {
+                clujPoll,
+                timisPoll
+            };
+
+            Assert.AreEqual(1, 1);
+
         }
 
     }
