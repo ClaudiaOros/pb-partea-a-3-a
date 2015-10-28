@@ -10,12 +10,12 @@ namespace SortingAndTesting.Tests
         [TestMethod]
         public void Ascending_order_of_a_text()
         {
-            string[] text = {"ana","are","mere","pere","gutui","kiwi" };
-            string[] expectedAscendingSortedText = { "ana","are","gutui","kiwi","mere","pere" };
+            string[] text = { "ana", "are", "mere", "pere", "gutui", "kiwi" };
+            string[] expectedAscendingSortedText = { "ana", "are", "gutui", "kiwi", "mere", "pere" };
 
-            string[] ascendingText = SortingAndSearching.SortingAndSearching.Quicksort(text,0,text.Length-1);
-            
-            CollectionAssert.AreEqual(expectedAscendingSortedText, ascendingText,"Ascending order not correct");
+            string[] ascendingText = SortingAndSearching.SortingAndSearching.Quicksort(text, 0, text.Length - 1);
+
+            CollectionAssert.AreEqual(expectedAscendingSortedText, ascendingText, "Ascending order not correct");
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace SortingAndTesting.Tests
         [TestMethod]
         public void Reparation_Priority()
         {
-            SortingAndSearching.SortingAndSearching.Reparation[]  reparations = new SortingAndSearching.SortingAndSearching.Reparation[]
+            SortingAndSearching.SortingAndSearching.Reparation[] reparations = new SortingAndSearching.SortingAndSearching.Reparation[]
              {  
                  new SortingAndSearching.SortingAndSearching.Reparation
                  {
@@ -121,8 +121,8 @@ namespace SortingAndTesting.Tests
         [TestMethod]
         public void Order_words()
         {
-            string[] text = {"ana","are","mere","mere","mere","pere","ana","cirese" };
-            string[] expectedText = {"ana","ana","are","cirese","mere","mere","mere","pere" };
+            string[] text = { "ana", "are", "mere", "mere", "mere", "pere", "ana", "cirese" };
+            string[] expectedText = { "ana", "ana", "are", "cirese", "mere", "mere", "mere", "pere" };
 
             string[] orderedText = SortingAndSearching.SortingAndSearching.SelectionSortingAlgorithm(text);
 
@@ -171,30 +171,31 @@ namespace SortingAndTesting.Tests
                 elections = new SortingAndSearching.SortingAndSearching.Elections[]
                 { 
                     new SortingAndSearching.SortingAndSearching.Elections()
-                    {
+                    {                          
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Iohannis,
+                    candidate = "Iohannis",
                    votes = 10
                     },
 
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Macovei,
+                    candidate  = "Macovei",
                    votes = 9
+
                     },
 
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Ponta,
+                    candidate = "Ponta",
                    votes = 8
                     },
 
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Tariceanu,
+                    candidate = "Tariceanu",
                    votes = 7
                     }
                 }
@@ -203,32 +204,32 @@ namespace SortingAndTesting.Tests
             var timisPoll = new SortingAndSearching.SortingAndSearching.Polls
             {
                 elections = new SortingAndSearching.SortingAndSearching.Elections[]
-                { 
+                {  
                     new SortingAndSearching.SortingAndSearching.Elections()
-                    {
+                    { 
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Iohannis,
+                   candidate = "Ponta",
                    votes = 11
                     },
 
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Macovei,
-                   votes = 4
+                    candidate = "Iohannis",
+                   votes = 9
                     },
 
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Ponta,
+                    candidate = "Tariceanu",
                    votes = 3
                     },
 
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Tariceanu,
+                    candidate = "Macovei",
                    votes = 2
                     }
                 }
@@ -241,28 +242,28 @@ namespace SortingAndTesting.Tests
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Iohannis,
+                    candidate = "Iohannis",
                    votes = 13
                     },
 
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Macovei,
+                    candidate = "Tariceanu",
                    votes = 6
                     },
 
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Ponta,
+                    candidate = "Ponta",
                    votes = 5
                     },
 
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
 
-                   candidates = SortingAndSearching.SortingAndSearching.Candidates.Tariceanu,
+                    candidate = "Macovei",
                    votes = 1
                     }
                 }
@@ -271,11 +272,49 @@ namespace SortingAndTesting.Tests
             SortingAndSearching.SortingAndSearching.Polls[] polls = new SortingAndSearching.SortingAndSearching.Polls[] 
             {
                 clujPoll,
-                timisPoll
+                timisPoll,
+                albaPoll
             };
 
-            Assert.AreEqual(1, 1);
 
+
+            var expectedListOfCandidates = new SortingAndSearching.SortingAndSearching.Polls
+            {
+                elections = new SortingAndSearching.SortingAndSearching.Elections[]
+                { 
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+                          candidate = "Iohannis",
+                         votes = 32
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+                         candidate = "Ponta",
+                         votes = 24
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+                        candidate = "Tariceanu",
+                        votes = 16
+                    },
+
+                    new SortingAndSearching.SortingAndSearching.Elections()
+                    {
+                         candidate = "Macovei",
+                         votes = 12
+                    }
+                }
+            };
+
+            SortingAndSearching.SortingAndSearching.Polls listOfCandidates = SortingAndSearching.SortingAndSearching.GetWinner(polls);
+
+            for (int i = 0; i < expectedListOfCandidates.elections.Length; i++ )
+            {
+                Assert.AreEqual(expectedListOfCandidates.elections[i].votes, listOfCandidates.elections[i].votes);
+                Assert.AreEqual(expectedListOfCandidates.elections[i].candidate, listOfCandidates.elections[i].candidate);
+            }
         }
 
     }

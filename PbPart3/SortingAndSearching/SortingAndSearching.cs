@@ -15,14 +15,6 @@ namespace SortingAndSearching
             high
         };
 
-        public enum Candidates
-        {
-            Iohannis,
-            Ponta,
-            Macovei ,
-            Tariceanu 
-        };
-
         public struct Reparation
         {
             public string reparation;
@@ -32,7 +24,7 @@ namespace SortingAndSearching
 
         public struct Elections
         {
-            public Candidates candidates;
+            public string candidate;
             public int votes;
         }
 
@@ -139,10 +131,10 @@ namespace SortingAndSearching
             {
                 min = i;
                 for (int j = i + 1; j < text.Length; j++)
-                    if ( IsLessThan(text[j] , text[min]))
+                    if (IsLessThan(text[j], text[min]))
                         min = j;
 
-                Swap (text, min, i);
+                Swap(text, min, i);
             }
 
             return text;
@@ -175,7 +167,7 @@ namespace SortingAndSearching
             int k = left;
             int n = right;
             int p = n;
-            
+
 
             while (i < p)
             {
@@ -190,7 +182,7 @@ namespace SortingAndSearching
 
             // move pivots to center
             int m = GetMinValue(p - k, n - p + 1);
-            SwapMore(text,k, k + m - 1, n - m + 1, n);
+            SwapMore(text, k, k + m - 1, n - m + 1, n);
 
             // recursive sorts
 
@@ -223,50 +215,133 @@ namespace SortingAndSearching
         {
             bool isLess = false;
 
-            if (a.Length != b.Length)            
+            if (a.Length != b.Length)
                 SetSameLengthForTwoStrings(ref a, ref b);
             bool equal = false;
 
             for (int i = 0; i < a.Length; i++)
             {
-                if (a[i] == b[i])            
-                 equal = true;
-            
-                else 
-                   if (a[i] > b[i])
-                {
-                    isLess = false;
-                    break;
-                }
+                if (a[i] == b[i])
+                    equal = true;
+
                 else
-                    if (a[i] < b[i])
+                    if (a[i] > b[i])
                     {
-                        isLess = true;
+                        isLess = false;
                         break;
                     }
+                    else
+                        if (a[i] < b[i])
+                        {
+                            isLess = true;
+                            break;
+                        }
 
             }
             return isLess;
         }
 
-        public static void SetSameLengthForTwoStrings(ref string  a, ref string b)
+        public static void SetSameLengthForTwoStrings(ref string a, ref string b)
         {
-          
+
             if (a.Length > b.Length)
-                for (int i = b.Length ; i < a.Length; i++)
+                for (int i = b.Length; i < a.Length; i++)
                     b = b + "0";
             else
                 if (b.Length > a.Length)
-                    for (int i = a.Length ; i < b.Length; i++)
+                    for (int i = a.Length; i < b.Length; i++)
                         a = a + "0";
         }
 
-        public static Candidates GetWinner(Polls polls)
+        public static Polls GetWinner(Polls[] polls)
         {
-            Candidates candidat = Candidates.Iohannis;
 
+            Polls finalList = new Polls()
+            {
+                elections = new Elections[]
+                { 
+                    new Elections()
+                    {
+                     candidate = "Iohannis",
+                     votes = 0
+                    },
 
-            return candidat;
+                    new Elections()
+                    {
+                      candidate = "Macovei",
+                      votes = 0
+                    },
+
+                    new Elections()
+                    {
+                     candidate = "Ponta",
+                     votes = 0
+                    },
+
+                    new Elections()
+                    {
+                      candidate = "Tariceanu",
+                      votes = 0
+                    }
+                }
+            };
+
+            finalList = GetFinalResultsForCandidates(polls, finalList);
+
+            OrderListOfCandidatesByVotes(ref finalList);
+
+            return finalList;
+        }
+
+        public static Polls GetFinalResultsForCandidates(Polls[] polls, Polls finalList)
+        {
+            for (int i = 0; i < polls.Length; i++)
+            {
+                for (int j = 0; j < polls[i].elections.Length; j++)
+                {
+                    if (polls[i].elections[j].candidate == "Iohannis")
+                    {
+                        finalList.elections[0].votes += polls[i].elections[j].votes;
+                    }
+                    else
+                        if (polls[i].elections[j].candidate == "Macovei")
+                        {
+                            finalList.elections[1].votes += polls[i].elections[j].votes;
+                        }
+                        else
+                            if (polls[i].elections[j].candidate == "Ponta")
+                            {
+                                finalList.elections[2].votes += polls[i].elections[j].votes;
+                            }
+                            else if (polls[i].elections[j].candidate == "Tariceanu")
+                            {
+                                finalList.elections[3].votes += polls[i].elections[j].votes;
+                            }
+                }
+            }
+            return finalList;
+        }
+
+        public static void OrderListOfCandidatesByVotes(ref Polls finalList)
+        {
+                 int j;
+                 for (int i = 1; i < finalList.elections.Length; i++ )
+                 {
+                     j = i;
+
+                     while (j > 0 && finalList.elections[j - 1].votes < finalList.elections[j].votes)
+                     {
+                         SwapCandidates(ref finalList.elections[j],ref finalList.elections[j - 1]);
+                         j = j - 1;
+                     }
+                 }           
+        }
+
+        public static void SwapCandidates(ref Elections candidate1,ref Elections candidate2)
+        {
+            var temp = candidate1;
+            candidate1 = candidate2;
+            candidate2 = temp;
         }
     }
 }
