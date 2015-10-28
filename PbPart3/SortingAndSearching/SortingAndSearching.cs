@@ -33,6 +33,12 @@ namespace SortingAndSearching
             public Elections[] elections;
         }
 
+        public struct Text
+        {
+            public string word;
+            public int occur;
+        }
+
         public static string[] Quicksort(string[] text, int left, int right)
         {
             int i = left, j = right;
@@ -342,6 +348,71 @@ namespace SortingAndSearching
             var temp = candidate1;
             candidate1 = candidate2;
             candidate2 = temp;
+        }
+
+
+        public static Dictionary<string, int> OrderWordsByOccurances(string[] text)
+        {
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+            foreach (string word in text)
+            {
+                if (dictionary.ContainsKey(word))
+                {
+                    dictionary[word] += 1;
+                }
+                else
+                {
+                    dictionary.Add(word, 1);
+                }
+            }
+
+            return dictionary;
+        }
+
+        public static Text[] OrderByOccurances(string[] text)
+        {
+            int size = 1;
+            Text[] finalList = new Text[10];
+
+            CreateListOfWordsWithOccurances(text, ref size, ref finalList);          
+
+            return finalList;
+        }
+
+        private static void CreateListOfWordsWithOccurances(string[] text, ref int size, ref Text[] finalList)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                for (int j = 0; j < finalList.Length; j++)
+                {
+                    if (finalList[j].word == text[i])
+                        finalList[j].occur++;
+                    else
+                    {                        
+                       // Array.Resize(ref finalList, size);
+                        finalList[size-1].word = text[i];
+                        finalList[size-1].occur = 1;
+                        size++;
+                    }
+                }
+            }
+
+            ResizeArray(ref finalList);
+        }
+
+        public static void ResizeArray(ref Text[] array)
+        {
+            int size = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i].word != string.Empty)
+                    size++;
+                else break;
+            }
+
+            Array.Resize(ref array, size - 1);
+
         }
     }
 }

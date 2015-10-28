@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SortingAndSearching;
+using System.Collections.Generic;
 
 namespace SortingAndTesting.Tests
 {
@@ -44,37 +45,37 @@ namespace SortingAndTesting.Tests
         public void Reparation_Priority()
         {
             SortingAndSearching.SortingAndSearching.Reparation[] reparations = new SortingAndSearching.SortingAndSearching.Reparation[]
-             {  
+             {
                  new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "schimb anvelope" ,
-                     priority = SortingAndSearching.SortingAndSearching.Priority.low                      
+                     priority = SortingAndSearching.SortingAndSearching.Priority.low
                  },
 
                  new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "schimb ulei" ,
-                     priority =SortingAndSearching.SortingAndSearching.Priority.medium                      
+                     priority =SortingAndSearching.SortingAndSearching.Priority.medium
                  },
                   new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "schimb motor" ,
-                     priority = SortingAndSearching.SortingAndSearching.Priority.high                      
+                     priority = SortingAndSearching.SortingAndSearching.Priority.high
                  },
                   new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "schimb stergatoare" ,
-                     priority = SortingAndSearching.SortingAndSearching.Priority.low                      
+                     priority = SortingAndSearching.SortingAndSearching.Priority.low
                  },
                   new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "spalat motor" ,
-                     priority = SortingAndSearching.SortingAndSearching.Priority.medium                      
+                     priority = SortingAndSearching.SortingAndSearching.Priority.medium
                  },
                   new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "vopsit" ,
-                     priority = SortingAndSearching.SortingAndSearching.Priority.medium                      
+                     priority = SortingAndSearching.SortingAndSearching.Priority.medium
                  }
              };
 
@@ -83,33 +84,33 @@ namespace SortingAndTesting.Tests
                 new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "schimb anvelope" ,
-                     priority = SortingAndSearching.SortingAndSearching.Priority.low                      
+                     priority = SortingAndSearching.SortingAndSearching.Priority.low
                  },
                   new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "schimb stergatoare" ,
-                     priority = SortingAndSearching.SortingAndSearching.Priority.low                      
+                     priority = SortingAndSearching.SortingAndSearching.Priority.low
                  },
                   new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "schimb ulei" ,
-                     priority =SortingAndSearching.SortingAndSearching.Priority.medium                      
+                     priority =SortingAndSearching.SortingAndSearching.Priority.medium
                  },
                   new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "spalat motor" ,
-                     priority = SortingAndSearching.SortingAndSearching.Priority.medium                      
+                     priority = SortingAndSearching.SortingAndSearching.Priority.medium
                  },
-                
+
                    new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "vopsit" ,
-                     priority = SortingAndSearching.SortingAndSearching.Priority.medium                      
+                     priority = SortingAndSearching.SortingAndSearching.Priority.medium
                  },
                    new SortingAndSearching.SortingAndSearching.Reparation
                  {
                      reparation = "schimb motor" ,
-                     priority = SortingAndSearching.SortingAndSearching.Priority.high                      
+                     priority = SortingAndSearching.SortingAndSearching.Priority.high
                  }
             };
 
@@ -169,9 +170,9 @@ namespace SortingAndTesting.Tests
             var clujPoll = new SortingAndSearching.SortingAndSearching.Polls
             {
                 elections = new SortingAndSearching.SortingAndSearching.Elections[]
-                { 
+                {
                     new SortingAndSearching.SortingAndSearching.Elections()
-                    {                          
+                    {
 
                     candidate = "Iohannis",
                    votes = 10
@@ -204,9 +205,9 @@ namespace SortingAndTesting.Tests
             var timisPoll = new SortingAndSearching.SortingAndSearching.Polls
             {
                 elections = new SortingAndSearching.SortingAndSearching.Elections[]
-                {  
+                {
                     new SortingAndSearching.SortingAndSearching.Elections()
-                    { 
+                    {
 
                    candidate = "Ponta",
                    votes = 11
@@ -238,7 +239,7 @@ namespace SortingAndTesting.Tests
             var albaPoll = new SortingAndSearching.SortingAndSearching.Polls
             {
                 elections = new SortingAndSearching.SortingAndSearching.Elections[]
-                { 
+                {
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
 
@@ -269,7 +270,7 @@ namespace SortingAndTesting.Tests
                 }
             };
 
-            SortingAndSearching.SortingAndSearching.Polls[] polls = new SortingAndSearching.SortingAndSearching.Polls[] 
+            SortingAndSearching.SortingAndSearching.Polls[] polls = new SortingAndSearching.SortingAndSearching.Polls[]
             {
                 clujPoll,
                 timisPoll,
@@ -281,7 +282,7 @@ namespace SortingAndTesting.Tests
             var expectedListOfCandidates = new SortingAndSearching.SortingAndSearching.Polls
             {
                 elections = new SortingAndSearching.SortingAndSearching.Elections[]
-                { 
+                {
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
                           candidate = "Iohannis",
@@ -310,11 +311,36 @@ namespace SortingAndTesting.Tests
 
             SortingAndSearching.SortingAndSearching.Polls listOfCandidates = SortingAndSearching.SortingAndSearching.GetWinner(polls);
 
-            for (int i = 0; i < expectedListOfCandidates.elections.Length; i++ )
+            for (int i = 0; i < expectedListOfCandidates.elections.Length; i++)
             {
                 Assert.AreEqual(expectedListOfCandidates.elections[i].votes, listOfCandidates.elections[i].votes);
                 Assert.AreEqual(expectedListOfCandidates.elections[i].candidate, listOfCandidates.elections[i].candidate);
             }
+        }
+
+
+        [TestMethod]
+        public void Order_words_by_occurances()
+        {
+            string[] text = { "ana", "are", "mere", "mere", "mere", "pere", "ana", "cirese" };
+
+            //SortingAndSearching.SortingAndSearching.Text[] expectedResult = new SortingAndSearching.SortingAndSearching.Text[]
+            //    {
+            //        new SortingAndSearching.SortingAndSearching.Text { word ="mere", occur = 3 } ,
+            //        new SortingAndSearching.SortingAndSearching.Text { word ="ana", occur = 2 } ,
+            //        new SortingAndSearching.SortingAndSearching.Text { word ="are", occur = 1 } ,
+            //        new SortingAndSearching.SortingAndSearching.Text { word ="cirese", occur = 1 }
+            //    };
+
+            Dictionary<string, int> expectedResult = new Dictionary<string, int>();
+            expectedResult.Add("mere", 3);
+            expectedResult.Add("ana", 2);
+            expectedResult.Add("are", 1);
+            expectedResult.Add("cirese", 1);
+
+            var actualResult = SortingAndSearching.SortingAndSearching.OrderWordsByOccurances(text);
+
+            CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
     }
