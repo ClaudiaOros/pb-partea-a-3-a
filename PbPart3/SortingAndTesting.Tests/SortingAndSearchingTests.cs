@@ -320,7 +320,7 @@ namespace SortingAndTesting.Tests
 
 
         [TestMethod]
-        public void Order_words_by_occurances()
+        public void Order_words_by_occurances_using_dictionary()
         {
             string[] text = { "ana", "are", "mere", "mere", "mere", "pere", "ana", "cirese" };
 
@@ -332,6 +332,45 @@ namespace SortingAndTesting.Tests
             expectedResult.Add("cirese", 1);
 
             var actualResult = SortingAndSearching.SortingAndSearching.OrderWordsByOccurances(text);
+
+            CollectionAssert.AreEqual(expectedResult, actualResult);
+        }
+
+        [TestMethod]
+        public void Order_words_by_occurrances()
+        {
+            string[] text = { "ana", "are", "mere", "mere", "mere", "pere", "ana", "cirese" };
+
+            SortingAndSearching.SortingAndSearching.Text[] expectedResult = new SortingAndSearching.SortingAndSearching.Text[]
+            {
+                new SortingAndSearching.SortingAndSearching.Text()
+                {  
+                     word = "mere",
+                     occur = 3
+                },
+                new SortingAndSearching.SortingAndSearching.Text()
+                {  
+                     word = "ana",
+                     occur = 2
+                },
+                new SortingAndSearching.SortingAndSearching.Text()
+                {  
+                     word = "are",
+                     occur = 1
+                },
+                new SortingAndSearching.SortingAndSearching.Text()
+                {  
+                     word = "cirese",
+                     occur = 1
+                },
+                new SortingAndSearching.SortingAndSearching.Text()
+                {  
+                     word = "pere",
+                     occur = 1
+                }
+            };
+
+            var actualResult= SortingAndSearching.SortingAndSearching.OrderWordsByOccurrances(text);
 
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }

@@ -331,20 +331,20 @@ namespace SortingAndSearching
 
         public static void OrderListOfCandidatesByVotes(ref Polls finalList)
         {
-                 int j;
-                 for (int i = 1; i < finalList.elections.Length; i++ )
-                 {
-                     j = i;
+            int j;
+            for (int i = 1; i < finalList.elections.Length; i++)
+            {
+                j = i;
 
-                     while (j > 0 && finalList.elections[j - 1].votes < finalList.elections[j].votes)
-                     {
-                         SwapCandidates(ref finalList.elections[j],ref finalList.elections[j - 1]);
-                         j = j - 1;
-                     }
-                 }           
+                while (j > 0 && finalList.elections[j - 1].votes < finalList.elections[j].votes)
+                {
+                    SwapCandidates(ref finalList.elections[j], ref finalList.elections[j - 1]);
+                    j = j - 1;
+                }
+            }
         }
 
-        public static void SwapCandidates(ref Elections candidate1,ref Elections candidate2)
+        public static void SwapCandidates(ref Elections candidate1, ref Elections candidate2)
         {
             var temp = candidate1;
             candidate1 = candidate2;
@@ -353,7 +353,7 @@ namespace SortingAndSearching
 
         public static Dictionary<string, int> OrderWordsByOccurances(string[] text)
         {
-            var dictionary =  InsertIntoDictionary(text);
+            var dictionary = InsertIntoDictionary(text);
             var dctTemp = new Dictionary<string, int>();
 
             foreach (var item in dictionary.OrderByDescending(key => key.Value))
@@ -381,5 +381,71 @@ namespace SortingAndSearching
 
             return dictionary;
         }
+
+        public static Text[] OrderWordsByOccurrances(string[] text)
+        {
+            int size = 1;
+            var finalList = new Text[0];
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                finalList = AddAnElement(ref finalList, text[i]);
+            }
+
+            finalList = SelectionSortingAlgorithm(finalList);
+
+            return finalList;
+        }
+
+
+        public static Text[] AddAnElement(ref Text[] text, string word)
+        {
+            for (int i=0; i<text.Length; i ++)
+            {
+                if (text[i].word == word)
+                {
+                    text[i].occur++;
+                    return text;
+                }
+            }
+
+            Array.Resize(ref text, text.Length + 1);
+            text[text.Length - 1].word = word;
+            text[text.Length - 1].occur = 1;
+
+            return text;
+
+            }
+        
+
+    public static Text[] SelectionSortingAlgorithm(Text[] text)
+    {
+        int min;
+        Text temp;
+
+        for (int i = 0; i < text.Length - 1; i++)
+        {
+            min = i;
+            for (int j = i + 1; j < text.Length; j++)
+                if ((text[j].occur > text[min].occur) || ((text[j].occur == text[min].occur) && ( IsLessThan(text[j].word , text[min].word))))
+                    min = j;
+
+            temp = SwapValues(text, min, i);
+        }
+
+        return text;
+    }
+
+    private static Text SwapValues(Text[] text, int min, int i)
+    {
+        Text temp;
+
+        temp = text[i];
+        text[i] = text[min];
+        text[min] = temp;
+        return temp;
+    }
+
+
     }
 }
