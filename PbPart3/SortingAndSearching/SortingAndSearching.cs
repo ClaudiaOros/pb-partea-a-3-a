@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace SortingAndSearching
 {
@@ -350,8 +351,20 @@ namespace SortingAndSearching
             candidate2 = temp;
         }
 
-
         public static Dictionary<string, int> OrderWordsByOccurances(string[] text)
+        {
+            var dictionary =  InsertIntoDictionary(text);
+            var dctTemp = new Dictionary<string, int>();
+
+            foreach (var item in dictionary.OrderByDescending(key => key.Value))
+            {
+                dctTemp.Add(item.Key, item.Value);
+            }
+
+            return dctTemp;
+        }
+
+        private static Dictionary<string, int> InsertIntoDictionary(string[] text)
         {
             Dictionary<string, int> dictionary = new Dictionary<string, int>();
             foreach (string word in text)
@@ -367,52 +380,6 @@ namespace SortingAndSearching
             }
 
             return dictionary;
-        }
-
-        public static Text[] OrderByOccurances(string[] text)
-        {
-            int size = 1;
-            Text[] finalList = new Text[10];
-
-            CreateListOfWordsWithOccurances(text, ref size, ref finalList);          
-
-            return finalList;
-        }
-
-        private static void CreateListOfWordsWithOccurances(string[] text, ref int size, ref Text[] finalList)
-        {
-            for (int i = 0; i < text.Length; i++)
-            {
-                for (int j = 0; j < finalList.Length; j++)
-                {
-                    if (finalList[j].word == text[i])
-                        finalList[j].occur++;
-                    else
-                    {                        
-                       // Array.Resize(ref finalList, size);
-                        finalList[size-1].word = text[i];
-                        finalList[size-1].occur = 1;
-                        size++;
-                    }
-                }
-            }
-
-            ResizeArray(ref finalList);
-        }
-
-        public static void ResizeArray(ref Text[] array)
-        {
-            int size = 0;
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array[i].word != string.Empty)
-                    size++;
-                else break;
-            }
-
-            Array.Resize(ref array, size - 1);
-
         }
     }
 }

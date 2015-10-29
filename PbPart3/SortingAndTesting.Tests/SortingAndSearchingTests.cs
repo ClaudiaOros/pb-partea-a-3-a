@@ -324,18 +324,11 @@ namespace SortingAndTesting.Tests
         {
             string[] text = { "ana", "are", "mere", "mere", "mere", "pere", "ana", "cirese" };
 
-            //SortingAndSearching.SortingAndSearching.Text[] expectedResult = new SortingAndSearching.SortingAndSearching.Text[]
-            //    {
-            //        new SortingAndSearching.SortingAndSearching.Text { word ="mere", occur = 3 } ,
-            //        new SortingAndSearching.SortingAndSearching.Text { word ="ana", occur = 2 } ,
-            //        new SortingAndSearching.SortingAndSearching.Text { word ="are", occur = 1 } ,
-            //        new SortingAndSearching.SortingAndSearching.Text { word ="cirese", occur = 1 }
-            //    };
-
             Dictionary<string, int> expectedResult = new Dictionary<string, int>();
             expectedResult.Add("mere", 3);
             expectedResult.Add("ana", 2);
             expectedResult.Add("are", 1);
+            expectedResult.Add("pere", 1);
             expectedResult.Add("cirese", 1);
 
             var actualResult = SortingAndSearching.SortingAndSearching.OrderWordsByOccurances(text);
