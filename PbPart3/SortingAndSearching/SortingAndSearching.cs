@@ -273,7 +273,7 @@ namespace SortingAndSearching
                     {
                         if (finalList[z].candidate == polls[i].elections[j].candidate)
                         {
-                            finalList[z].votes++;
+                            finalList[z].votes += polls[i].elections[j].votes;
                             break;
                         }
                     }
