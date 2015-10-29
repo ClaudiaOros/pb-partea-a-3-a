@@ -279,9 +279,7 @@ namespace SortingAndTesting.Tests
 
 
 
-            var expectedListOfCandidates = new SortingAndSearching.SortingAndSearching.Polls
-            {
-                elections = new SortingAndSearching.SortingAndSearching.Elections[]
+            var expectedListOfCandidates = new SortingAndSearching.SortingAndSearching.Elections[]
                 {
                     new SortingAndSearching.SortingAndSearching.Elections()
                     {
@@ -306,15 +304,15 @@ namespace SortingAndTesting.Tests
                          candidate = "Macovei",
                          votes = 12
                     }
-                }
+                
             };
 
-            SortingAndSearching.SortingAndSearching.Polls listOfCandidates = SortingAndSearching.SortingAndSearching.GetWinner(polls);
+            SortingAndSearching.SortingAndSearching.Elections[] listOfCandidates = SortingAndSearching.SortingAndSearching.GetWinner(polls);
 
-            for (int i = 0; i < expectedListOfCandidates.elections.Length; i++)
+            for (int i = 0; i < expectedListOfCandidates.Length; i++)
             {
-                Assert.AreEqual(expectedListOfCandidates.elections[i].votes, listOfCandidates.elections[i].votes);
-                Assert.AreEqual(expectedListOfCandidates.elections[i].candidate, listOfCandidates.elections[i].candidate);
+                Assert.AreEqual(expectedListOfCandidates[i].votes, listOfCandidates[i].votes);
+                Assert.AreEqual(expectedListOfCandidates[i].candidate, listOfCandidates[i].candidate);
             }
         }
 

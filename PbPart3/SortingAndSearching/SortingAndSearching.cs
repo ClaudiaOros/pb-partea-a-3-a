@@ -260,85 +260,41 @@ namespace SortingAndSearching
                         a = a + "0";
         }
 
-        public static Polls GetWinner(Polls[] polls)
+        public static Elections[] GetWinner(Polls[] polls)
         {
 
-            Polls finalList = new Polls()
+            Elections[] finalList = polls[0].elections;
+
+            for (int i = 1; i < polls.Length; i++)
             {
-                elections = new Elections[]
-                { 
-                    new Elections()
-                    {
-                     candidate = "Iohannis",
-                     votes = 0
-                    },
+                for (int j = 0; j < polls[i].elections.Length; j++)
 
-                    new Elections()
+                    for (int z = 0; z < finalList.Length; z++)
                     {
-                      candidate = "Macovei",
-                      votes = 0
-                    },
-
-                    new Elections()
-                    {
-                     candidate = "Ponta",
-                     votes = 0
-                    },
-
-                    new Elections()
-                    {
-                      candidate = "Tariceanu",
-                      votes = 0
+                        if (finalList[z].candidate == polls[i].elections[j].candidate)
+                        {
+                            finalList[z].votes++;
+                            break;
+                        }
                     }
-                }
-            };
-
-            finalList = GetFinalResultsForCandidates(polls, finalList);
+            }
 
             OrderListOfCandidatesByVotes(ref finalList);
 
             return finalList;
         }
 
-        public static Polls GetFinalResultsForCandidates(Polls[] polls, Polls finalList)
-        {
-            for (int i = 0; i < polls.Length; i++)
-            {
-                for (int j = 0; j < polls[i].elections.Length; j++)
-                {
-                    if (polls[i].elections[j].candidate == "Iohannis")
-                    {
-                        finalList.elections[0].votes += polls[i].elections[j].votes;
-                    }
-                    else
-                        if (polls[i].elections[j].candidate == "Macovei")
-                        {
-                            finalList.elections[1].votes += polls[i].elections[j].votes;
-                        }
-                        else
-                            if (polls[i].elections[j].candidate == "Ponta")
-                            {
-                                finalList.elections[2].votes += polls[i].elections[j].votes;
-                            }
-                            else if (polls[i].elections[j].candidate == "Tariceanu")
-                            {
-                                finalList.elections[3].votes += polls[i].elections[j].votes;
-                            }
-                }
-            }
-            return finalList;
-        }
 
-        public static void OrderListOfCandidatesByVotes(ref Polls finalList)
+        public static void OrderListOfCandidatesByVotes(ref  Elections[] finalList)
         {
             int j;
-            for (int i = 1; i < finalList.elections.Length; i++)
+            for (int i = 1; i < finalList.Length; i++)
             {
                 j = i;
 
-                while (j > 0 && finalList.elections[j - 1].votes < finalList.elections[j].votes)
+                while (j > 0 && finalList[j - 1].votes < finalList[j].votes)
                 {
-                    SwapCandidates(ref finalList.elections[j], ref finalList.elections[j - 1]);
+                    SwapCandidates(ref finalList[j], ref finalList[j - 1]);
                     j = j - 1;
                 }
             }
@@ -384,7 +340,6 @@ namespace SortingAndSearching
 
         public static Text[] OrderWordsByOccurrances(string[] text)
         {
-            int size = 1;
             var finalList = new Text[0];
 
             for (int i = 0; i < text.Length; i++)
