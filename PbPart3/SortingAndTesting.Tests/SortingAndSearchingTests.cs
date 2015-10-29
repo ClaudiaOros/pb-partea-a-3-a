@@ -304,7 +304,7 @@ namespace SortingAndTesting.Tests
                          candidate = "Macovei",
                          votes = 12
                     }
-                
+
             };
 
             SortingAndSearching.SortingAndSearching.Elections[] listOfCandidates = SortingAndSearching.SortingAndSearching.GetWinner(polls);
@@ -315,7 +315,6 @@ namespace SortingAndTesting.Tests
                 Assert.AreEqual(expectedListOfCandidates[i].candidate, listOfCandidates[i].candidate);
             }
         }
-
 
         [TestMethod]
         public void Order_words_by_occurances_using_dictionary()
@@ -342,33 +341,135 @@ namespace SortingAndTesting.Tests
             SortingAndSearching.SortingAndSearching.Text[] expectedResult = new SortingAndSearching.SortingAndSearching.Text[]
             {
                 new SortingAndSearching.SortingAndSearching.Text()
-                {  
+                {
                      word = "mere",
                      occur = 3
                 },
                 new SortingAndSearching.SortingAndSearching.Text()
-                {  
+                {
                      word = "ana",
                      occur = 2
                 },
                 new SortingAndSearching.SortingAndSearching.Text()
-                {  
+                {
                      word = "are",
                      occur = 1
                 },
                 new SortingAndSearching.SortingAndSearching.Text()
-                {  
+                {
                      word = "cirese",
                      occur = 1
                 },
                 new SortingAndSearching.SortingAndSearching.Text()
-                {  
+                {
                      word = "pere",
                      occur = 1
                 }
             };
 
-            var actualResult= SortingAndSearching.SortingAndSearching.OrderWordsByOccurrances(text);
+            var actualResult = SortingAndSearching.SortingAndSearching.OrderWordsByOccurrances(text);
+
+            CollectionAssert.AreEqual(expectedResult, actualResult);
+        }
+
+
+        [TestMethod]
+        public void Overall_For_One_Student()
+        {
+            var student1 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student1",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+              {
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                           name = "materie1",
+                           marks = new float[] {5, 5}
+                      },
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie2",
+                            marks = new float[] {7, 7}
+                     }
+             }
+            };
+
+            var expectedResult = new SortingAndSearching.SortingAndSearching.Overall()
+            {
+                overallMark = 6,
+                studentName = "student1"
+            };
+
+            SortingAndSearching.SortingAndSearching.Overall actualResult = SortingAndSearching.SortingAndSearching.GetOverallForOneStudent(student1);
+
+            Assert.AreEqual(expectedResult.studentName, actualResult.studentName);
+            Assert.AreEqual(expectedResult.overallMark, actualResult.overallMark);
+        }
+
+
+        [TestMethod]
+        public void Order_Students_By_Overall()
+        {
+            var student1 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student1",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+               {
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                           name = "materie1",
+                           marks = new float[] {5, 5}
+                      },
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie2",
+                            marks = new float[] {7, 7}
+                    }
+              }
+            };
+
+            var student2 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student2",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+                 {
+                     new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie1",
+                            marks = new float[] {6, 10}
+                     },
+                    new SortingAndSearching.SortingAndSearching.Subjects()
+                    {
+                            name = "materie2",
+                            marks = new float[] {10, 10}
+                    }
+                }
+            };
+
+            var students = new SortingAndSearching.SortingAndSearching.Student[]
+            {
+                student1,
+                student2
+            };
+
+            var expectedResult = new SortingAndSearching.SortingAndSearching.Overall[]
+            {
+                new SortingAndSearching.SortingAndSearching.Overall ()
+                {
+                    overallMark = 9,
+                    studentName = "student2"
+                },
+                new SortingAndSearching.SortingAndSearching.Overall ()
+                {
+                    overallMark = 6 ,
+                    studentName = "student1"
+                }
+            };
+
+            var actualResult = SortingAndSearching.SortingAndSearching.GetTheSmartestStudent(students);
 
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }

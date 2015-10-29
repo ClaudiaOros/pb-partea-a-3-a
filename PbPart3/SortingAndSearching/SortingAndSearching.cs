@@ -40,6 +40,25 @@ namespace SortingAndSearching
             public int occur;
         }
 
+        
+        public struct Subjects
+        {
+            public string name;
+            public float[] marks;
+        }
+
+        public struct Student
+        {
+            public string Name;
+            public Subjects[] subjects;
+        }
+
+        public struct Overall
+        {
+            public string studentName;
+            public float overallMark;
+        }
+
         public static string[] Quicksort(string[] text, int left, int right)
         {
             int i = left, j = right;
@@ -156,7 +175,6 @@ namespace SortingAndSearching
             repairs[min] = temp;
             return temp;
         }
-
 
         public static void Swap(string[] array, int a, int b)
         {
@@ -284,7 +302,6 @@ namespace SortingAndSearching
             return finalList;
         }
 
-
         public static void OrderListOfCandidatesByVotes(ref  Elections[] finalList)
         {
             int j;
@@ -352,7 +369,6 @@ namespace SortingAndSearching
             return finalList;
         }
 
-
         public static Text[] AddAnElement(ref Text[] text, string word)
         {
             for (int i=0; i<text.Length; i ++)
@@ -370,10 +386,9 @@ namespace SortingAndSearching
 
             return text;
 
-            }
-        
+            }        
 
-    public static Text[] SelectionSortingAlgorithm(Text[] text)
+        public static Text[] SelectionSortingAlgorithm(Text[] text)
     {
         int min;
         Text temp;
@@ -391,7 +406,7 @@ namespace SortingAndSearching
         return text;
     }
 
-    private static Text SwapValues(Text[] text, int min, int i)
+        private static Text SwapValues(Text[] text, int min, int i)
     {
         Text temp;
 
@@ -401,6 +416,47 @@ namespace SortingAndSearching
         return temp;
     }
 
+        public static Overall[] GetTheSmartestStudent(Student[] students)
+        {
+            var finalList = new Overall[students.Length];
 
+            for (int i = 0; i < students.Length; i++)
+                for (int j = 0; j < students[i].subjects.Length; j++)
+                    for (int z = 0; z < finalList.Length; z++)
+                {
+                        float average = 0;
+                        for (int t = 0; t < students[i].subjects[j].marks.Length; t++)
+                            average += students[i].subjects[j].marks[t];
+                        average = average / students[i].subjects[j].marks.Length;
+
+                        finalList[z].overallMark = average;
+                        finalList[z].studentName = students[i].Name;
+                }
+
+            return finalList;
+        }
+
+        public static Overall GetOverallForOneStudent(Student student)
+        {
+            float mark = 0;
+            float[] overallMarks = new float[0];
+            var overallStudent = new Overall();
+
+            for (int i = 0; i < student.subjects.Length; i++)
+            {
+                for (int j = 0; j < student.subjects[i].marks.Length; j++)
+                {
+                    mark += student.subjects[i].marks[j];
+                }
+
+                
+
+                overallStudent.overallMark = mark/ student.subjects[i].marks.Length;
+                overallStudent.studentName = student.Name;
+                mark = 0;
+            }
+
+            return overallStudent;
+        }
     }
 }
