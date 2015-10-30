@@ -59,6 +59,12 @@ namespace SortingAndSearching
             public float overallMark;
         }
 
+        public struct SmartestStudent
+        {
+            public string studentName;
+            public int noOf10s;
+        }
+
         public static string[] Quicksort(string[] text, int left, int right)
         {
             int i = left, j = right;
@@ -129,7 +135,6 @@ namespace SortingAndSearching
 
             return array;
         }
-
 
         public static Reparation[] SelectionSortingAlgorithm(Reparation[] repairs)
         {
@@ -416,31 +421,80 @@ namespace SortingAndSearching
         return temp;
     }
 
-        public static Overall[] GetTheSmartestStudent(Student[] students)
+        public static Overall[] GetTheStudentsWithOrderedListByOverallMarks(Student[] students)
         {
             var finalList = new Overall[students.Length];
 
             for (int i = 0; i < students.Length; i++)
-                for (int j = 0; j < students[i].subjects.Length; j++)
-                    for (int z = 0; z < finalList.Length; z++)
-                {
-                        float average = 0;
-                        for (int t = 0; t < students[i].subjects[j].marks.Length; t++)
-                            average += students[i].subjects[j].marks[t];
-                        average = average / students[i].subjects[j].marks.Length;
+            {
+                finalList[i] = GetOverallForOneStudent(students[i]);
+            }
 
-                        finalList[z].overallMark = average;
-                        finalList[z].studentName = students[i].Name;
-                }
+            finalList = SelectionSortingAlgorithm(finalList);
 
             return finalList;
         }
 
+        public static Overall[] SelectionSortingAlgorithm(Overall[] students)
+        {
+            int max;
+
+            for (int i = 0; i < students.Length - 1; i++)
+            {
+                max = i;
+                for (int j = i + 1; j < students.Length; j++)
+                    if (students[j].overallMark > students[max].overallMark)
+                        max = j;
+
+                Swap(students, max, i);
+            }
+
+            return students;
+        }
+
+        public static Overall Swap(Overall[] students, int max, int i)
+        {
+        Overall temp;
+
+        temp = students[i];
+        students[i] = students[max];
+        students[max] = temp;
+        return temp;
+        }
+
         public static Overall GetOverallForOneStudent(Student student)
         {
-            float mark = 0;
-            float[] overallMarks = new float[0];
             var overallStudent = new Overall();
+
+            float[] overallMarks;
+            float overallMark;
+
+            student = ReturnOverallMarksForAllSubjects(student, out overallMarks, out overallMark);
+
+            ReturnOverAllMarkForStudent(ref student, ref overallStudent, overallMarks, ref overallMark);
+
+            return overallStudent;
+        }
+
+        private static void ReturnOverAllMarkForStudent(ref Student student, ref Overall overallStudent, float[] overallMarks, ref float overallMark)
+        {
+            for (int i = 0; i < overallMarks.Length; i++)
+            {
+                overallMark += overallMarks[i];
+            }
+
+            overallMark = overallMark / student.subjects.Length;
+
+            overallStudent.overallMark = overallMark;
+            overallStudent.studentName = student.Name;
+        }
+
+        private static Student ReturnOverallMarksForAllSubjects(Student student, out float[] overallMarks, out float overallMark)
+        {
+            float mark = 0;
+            int size = 0;
+            overallMarks = new float[size];
+            overallMark = 0;
 
             for (int i = 0; i < student.subjects.Length; i++)
             {
@@ -449,14 +503,71 @@ namespace SortingAndSearching
                     mark += student.subjects[i].marks[j];
                 }
 
-                
-
-                overallStudent.overallMark = mark/ student.subjects[i].marks.Length;
-                overallStudent.studentName = student.Name;
+                size++;
+                Array.Resize(ref overallMarks, size);
+                overallMarks[size - 1] = mark / student.subjects[i].marks.Length;
                 mark = 0;
             }
+            return student;
+        }
 
-            return overallStudent;
+        public static Overall FindAStudentByOverallMark(Student[] students, float mark)
+        {
+            var student = new Overall();
+
+            var studentsWithOverall = GetTheStudentsWithOrderedListByOverallMarks(students);
+
+            for (int i = 0; i < studentsWithOverall.Length; i++)
+                if (studentsWithOverall[i].overallMark == mark)
+                {
+                    student.overallMark = studentsWithOverall[i].overallMark;
+                    student.studentName = studentsWithOverall[i].studentName;
+                }
+            return student;   
+        }
+
+        public static SmartestStudent GetStudentWithMost10s(Student[] students)
+        {
+            var noOf10sForFirstStudent = GetNoOf10sForAStudent(students[0]);
+            var smartStudent = new SmartestStudent()
+                {
+                     studentName = noOf10sForFirstStudent.studentName,
+                     noOf10s = noOf10sForFirstStudent.noOf10s
+                };
+
+            for (int i = 1; i < students.Length; i++)
+            {
+                var result = GetNoOf10sForAStudent(students[i]);
+                if (result.noOf10s > smartStudent.noOf10s)
+                {
+                    smartStudent.noOf10s = result.noOf10s;
+                    smartStudent.studentName = result.studentName;
+                }
+            }
+
+            return smartStudent;
+        }
+
+        public static SmartestStudent GetNoOf10sForAStudent(Student student)
+        {
+            var studentWith10s = new SmartestStudent();
+            int noOf10s = 0;
+
+            for (int i = 0; i < student.subjects.Length; i++)
+                for (int j = 0; j < student.subjects[i].marks.Length; j++)
+                    if (student.subjects[i].marks[j] == 10)
+                        noOf10s++;
+
+            studentWith10s.studentName = student.Name;
+            studentWith10s.noOf10s = noOf10s;
+
+            return studentWith10s;
+        }
+
+        public static Overall GetStudentWithLowestOverall(Student[] students)
+        {
+            var orderedList = GetTheStudentsWithOrderedListByOverallMarks(students);
+            return orderedList[orderedList.Length - 1];
         }
     }
 }

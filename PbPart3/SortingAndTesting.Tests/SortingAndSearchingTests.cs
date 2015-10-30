@@ -469,10 +469,284 @@ namespace SortingAndTesting.Tests
                 }
             };
 
-            var actualResult = SortingAndSearching.SortingAndSearching.GetTheSmartestStudent(students);
+            var actualResult = SortingAndSearching.SortingAndSearching.GetTheStudentsWithOrderedListByOverallMarks(students);
 
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
+        [TestMethod]
+        public void Verify_the_student_with_overall_7()
+        {
+            var student1 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student1",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+               {
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                           name = "materie1",
+                           marks = new float[] {5, 5}
+                      },
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie2",
+                            marks = new float[] {7, 7}
+                    }
+              }
+            };
+
+            var student2 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student2",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+                 {
+                     new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie1",
+                            marks = new float[] {6, 10}
+                     },
+                    new SortingAndSearching.SortingAndSearching.Subjects()
+                    {
+                            name = "materie2",
+                            marks = new float[] {10, 10}
+                    }
+                }
+            };
+
+            var student3 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student3",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+                 {
+                     new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie1",
+                            marks = new float[] {9, 9}
+                     },
+                    new SortingAndSearching.SortingAndSearching.Subjects()
+                    {
+                            name = "materie2",
+                            marks = new float[] {5, 5}
+                    }
+                }
+            };
+
+            var students = new SortingAndSearching.SortingAndSearching.Student[]
+            {
+                student1,
+                student2,
+                student3
+            };
+
+            var expectedResult = new SortingAndSearching.SortingAndSearching.Overall()
+            {
+                    overallMark = 7,
+                    studentName = "student3"                
+             
+            };
+
+            float overallMark = 7;
+
+            var actualResult = SortingAndSearching.SortingAndSearching.FindAStudentByOverallMark(students, overallMark);
+
+            Assert.AreEqual(expectedResult.overallMark, actualResult.overallMark);
+            Assert.AreEqual(expectedResult.studentName, actualResult.studentName); 
+        }
+
+
+        [TestMethod]
+        public void Verify_No_Of_10s_For_A_Student()
+        {
+            var student1 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student1",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+               {
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                           name = "materie1",
+                           marks = new float[] {10, 10}
+                      },
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie2",
+                            marks = new float[] {10, 10}
+                    }
+              }
+            };
+
+            var expectedResult = new SortingAndSearching.SortingAndSearching.SmartestStudent()
+            {
+                 studentName = "student1",
+                 noOf10s = 4
+            };
+
+            var actualResult = SortingAndSearching.SortingAndSearching.GetNoOf10sForAStudent(student1);
+
+            Assert.AreEqual(expectedResult.studentName, actualResult.studentName);
+            Assert.AreEqual(actualResult.noOf10s, actualResult.noOf10s);
+        }
+
+        [TestMethod]
+        public void Verify_the_smartest_student()
+        {
+            var student1 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student1",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+               {
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                           name = "materie1",
+                           marks = new float[] {10, 5}
+                      },
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie2",
+                            marks = new float[] {10, 7}
+                    }
+              }
+            };
+
+            var student2 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student2",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+                 {
+                     new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie1",
+                            marks = new float[] {6, 10}
+                     },
+                    new SortingAndSearching.SortingAndSearching.Subjects()
+                    {
+                            name = "materie2",
+                            marks = new float[] {10, 10}
+                    }
+                }
+            };
+
+            var student3 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student3",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+                 {
+                     new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie1",
+                            marks = new float[] {10, 9}
+                     },
+                    new SortingAndSearching.SortingAndSearching.Subjects()
+                    {
+                            name = "materie2",
+                            marks = new float[] {5, 5}
+                    }
+                }
+            };
+
+            var students = new SortingAndSearching.SortingAndSearching.Student[]
+            {
+                student1,
+                student2,
+                student3
+            };
+
+            var expectedResult = new SortingAndSearching.SortingAndSearching.SmartestStudent() 
+            {
+                 studentName = "student2",
+                 noOf10s = 3
+            };
+
+            var actualResult = SortingAndSearching.SortingAndSearching.GetStudentWithMost10s(students);
+
+            Assert.AreEqual(expectedResult.studentName, actualResult.studentName);
+            Assert.AreEqual(expectedResult.noOf10s, actualResult.noOf10s);
+        }
+
+        [TestMethod]
+        public void Verify_the_student_with_lowest_overall()
+        {
+            var student1 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student1",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+               {
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                           name = "materie1",
+                           marks = new float[] {5, 5}
+                      },
+                      new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie2",
+                            marks = new float[] {5, 5}
+                    }
+              }
+            };
+
+            var student2 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student2",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+                 {
+                     new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie1",
+                            marks = new float[] {6, 10}
+                     },
+                    new SortingAndSearching.SortingAndSearching.Subjects()
+                    {
+                            name = "materie2",
+                            marks = new float[] {10, 10}
+                    }
+                }
+            };
+
+            var student3 = new SortingAndSearching.SortingAndSearching.Student
+            {
+                Name = "student3",
+
+                subjects = new SortingAndSearching.SortingAndSearching.Subjects[]
+                 {
+                     new SortingAndSearching.SortingAndSearching.Subjects()
+                     {
+                            name = "materie1",
+                            marks = new float[] {9, 9}
+                     },
+                    new SortingAndSearching.SortingAndSearching.Subjects()
+                    {
+                            name = "materie2",
+                            marks = new float[] {5, 5}
+                    }
+                }
+            };
+
+            var students = new SortingAndSearching.SortingAndSearching.Student[]
+            {
+                student1,
+                student2,
+                student3
+            };
+
+            var expectedResult = new SortingAndSearching.SortingAndSearching.Overall()
+            {
+                studentName = "student1",
+                overallMark = 5
+            };
+
+            var actualResult = SortingAndSearching.SortingAndSearching.GetStudentWithLowestOverall(students);
+
+            Assert.AreEqual(expectedResult.studentName, actualResult.studentName);
+            Assert.AreEqual(expectedResult.overallMark, actualResult.overallMark);
+        }
     }
 }
