@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace SortingAndSearching
 {
@@ -39,7 +38,6 @@ namespace SortingAndSearching
             public string word;
             public int occur;
         }
-
         
         public struct Subjects
         {
