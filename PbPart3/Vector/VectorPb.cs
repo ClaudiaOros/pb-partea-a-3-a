@@ -42,8 +42,43 @@ namespace Vector
 
             public object[] Insert(int position, object element)
             {
-                
-                return obj;
+
+                if (obj[position] == null)
+                {
+                    obj[position] = element;
+                    return obj;
+                }
+                else
+                {
+                    if (count % 8 == 0)
+                    {
+                        var obj2 = new object[count * 2];
+
+                        for (int i = 0; i < position; i++)
+                        {
+                            obj2[i] = obj[i];
+                        }
+
+                        obj2[position] = element;
+
+                        for (int i = position + 1; i <= count; i++)
+                        {
+                            obj2[i] = obj[i-1]; 
+                        }
+
+                        return obj2;
+                    }
+                    else
+                    {
+                        for (int i = count - 1; i >= position; i--)
+                        {
+                            obj[i + 1] = obj[i];
+                        }
+
+                        obj[position] = element;
+                        return obj;
+                    }
+                }
             }
 
             public object[] Remove(object element)
