@@ -152,7 +152,22 @@ namespace Vector
 
             public object[] Remove(int index)
             {
-                return obj;
+                if (count % 8 == 1)
+                {
+                    var obj2 = new object[count - 1];
+
+                    CopyElementsUntillPosition(index, obj2);
+
+                    CopyElementsFromPosition2(index, obj2);
+
+                    return obj2;
+ 
+                }
+                else
+                {
+                    MoveElementsToRightOneStepStartingWithAPosition(index);
+                    return obj;
+                }
             }
 
             private bool MoveNext()

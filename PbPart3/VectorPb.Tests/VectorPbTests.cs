@@ -113,6 +113,36 @@ namespace VectorPb.Tests
 
             CollectionAssert.AreEqual(expectedVector, resultedVector);
         }
+
+        [TestMethod]
+        public void Verify_an_array_after_removing_an_element_on_a_certain_position_without_resizing_the_array()
+        {
+            int count = 7;
+            object[] obj = new object[8] { 1, 2, 3, 4, 5, 6, 7, null };
+            var expectedVector = new object[] { 1, 2, 3, 5, 6, 7, null, null };
+            var vector = new Vector.VectorPb(obj, count);
+
+            int position = 3;
+
+            var resultedVector = vector.Remove(position);
+
+            CollectionAssert.AreEqual(expectedVector, resultedVector);
+        }
+
+        [TestMethod]
+        public void Verify_an_array_after_removing_an_element_on_a_certain_position_with_resizing_the_array()
+        {
+            int count = 9;
+            object[] obj = new object[16] { 1, 2, 3, 4, 5, 6, 7, 8, 9, null, null, null, null, null, null, null };
+            var expectedVector = new object[8] { 1, 2, 3, 5, 6, 7, 8, 9 };
+            var vector = new Vector.VectorPb(obj, count);
+
+            int position = 3;
+
+            var resultedVector = vector.Remove(position);
+
+            CollectionAssert.AreEqual(expectedVector, resultedVector);
+        }
             
     }
 }
