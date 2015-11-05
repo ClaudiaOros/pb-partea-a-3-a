@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 namespace Vector
 {  
 
-    public class VectorPb  //: IEnumerable, IEnumerator
+    public class VectorPb : IEnumerable 
     {
-
         public int count;
         public object[] obj;
 
@@ -170,15 +169,22 @@ namespace Vector
                 }
             }
 
-            private bool MoveNext()
-            {
-                return true;
+            public int GetCount()
+            { 
+                return count;
             }
 
-            private void Reset()
+            public object[] GetData()
             {
-
+                return obj;
             }
+
+            public IEnumerator GetEnumerator()
+            {
+                return new VectorEnum
+            }
+
+        
         
     }
 }
