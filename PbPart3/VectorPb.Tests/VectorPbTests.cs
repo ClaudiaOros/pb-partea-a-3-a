@@ -143,6 +143,13 @@ namespace VectorPb.Tests
 
             CollectionAssert.AreEqual(expectedVector, resultedVector);
         }
+
+        [TestMethod]
+        public void Verify()
+        {
+ 
+        }
+
             
     }
 }

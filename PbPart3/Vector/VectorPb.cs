@@ -181,7 +181,7 @@ namespace Vector
 
             public IEnumerator GetEnumerator()
             {
-                return new VectorEnum
+                return new VectorEnum(this);
             }
 
         
