@@ -14,7 +14,7 @@ namespace VectorPb.Tests
             int count = 7;
             object[] obj = new object[8] { 1, 2, 3, 4, 5, 6, 7, null };
             var expectedVector = new object[] { 1, 2, 3, 4, 5, 6, 7, 9 };
-            var vector = new Vector.VectorPb(obj,count);
+            var vector = new Vector.VectorPb<object>(obj,count);
 
             object elementToBeAdded = 9;
             var resultedVector = vector.Add(elementToBeAdded);
@@ -28,7 +28,7 @@ namespace VectorPb.Tests
             int count = 8;
             object[] obj = new object[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
             var expectedVector = new object[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 ,null,null,null,null,null,null,null};
-            var vector = new Vector.VectorPb(obj, count);
+            var vector = new Vector.VectorPb<object>(obj, count);
 
             object elementToBeAdded = 9;
             var resultedVector = vector.Add(elementToBeAdded);
@@ -42,7 +42,7 @@ namespace VectorPb.Tests
             int count = 7;
             object[] obj = new object[8] { 1, 2, 3, 4, 5, 6, 7, null };
             var expectedVector = new object[] { 1, 2, 3, 4, 5, 6, 7, 9 };
-            var vector = new Vector.VectorPb(obj, count);
+            var vector = new Vector.VectorPb<object>(obj, count);
 
             object elementToBeAdded = 9;
             int position = 7;
@@ -58,7 +58,7 @@ namespace VectorPb.Tests
             int count = 7;
             object[] obj = new object[8] { 1, 2, 3, 4, 5, 6, 7, null };
             var expectedVector = new object[] { 1, 2, 3, 9, 4, 5, 6, 7 };
-            var vector = new Vector.VectorPb(obj, count);
+            var vector = new Vector.VectorPb<object>(obj, count);
 
             object elementToBeAdded = 9;
             int position = 3;
@@ -74,7 +74,7 @@ namespace VectorPb.Tests
             int count = 8;
             object[] obj = new object[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
             var expectedVector = new object[] { 1, 2, 3, 9, 4, 5, 6, 7, 8, null, null, null, null, null, null, null };
-            var vector = new Vector.VectorPb(obj, count);
+            var vector = new Vector.VectorPb<object>(obj, count);
 
             object elementToBeAdded = 9;
             int position = 3;
@@ -90,7 +90,7 @@ namespace VectorPb.Tests
             int count = 7;
             object[] obj = new object[8] { 1, 2, 3, 4, 5, 6, 7, null };
             var expectedVector = new object[] { 1, 2, 3, 5, 6, 7 ,null, null};
-            var vector = new Vector.VectorPb(obj, count);
+            var vector = new Vector.VectorPb<object>(obj, count);
 
             object elementToBeRemoved = 4;
 
@@ -105,7 +105,7 @@ namespace VectorPb.Tests
             int count = 9;
             object[] obj = new object[16] { 1, 2, 3, 4, 5, 6, 7, 8, 9, null, null, null, null, null, null, null };
             var expectedVector = new object[8] { 1, 2, 3, 5, 6, 7, 8, 9 };
-            var vector = new Vector.VectorPb(obj, count);
+            var vector = new Vector.VectorPb<object>(obj, count);
 
             object elementToBeRemoved = 4;
 
@@ -120,7 +120,7 @@ namespace VectorPb.Tests
             int count = 7;
             object[] obj = new object[8] { 1, 2, 3, 4, 5, 6, 7, null };
             var expectedVector = new object[] { 1, 2, 3, 5, 6, 7, null, null };
-            var vector = new Vector.VectorPb(obj, count);
+            var vector = new Vector.VectorPb<object>(obj, count);
 
             int position = 3;
 
@@ -135,7 +135,7 @@ namespace VectorPb.Tests
             int count = 9;
             object[] obj = new object[16] { 1, 2, 3, 4, 5, 6, 7, 8, 9, null, null, null, null, null, null, null };
             var expectedVector = new object[8] { 1, 2, 3, 5, 6, 7, 8, 9 };
-            var vector = new Vector.VectorPb(obj, count);
+            var vector = new Vector.VectorPb<object>(obj, count);
 
             int position = 3;
 
@@ -150,7 +150,7 @@ namespace VectorPb.Tests
             int count = 9;
             object[] obj = new object[16] { 1, 2, 3, 4, 5, 6, 7, 8, 9, null, null, null, null, null, null, null };
 
-            Vector.VectorPb vector = new Vector.VectorPb(obj,count);
+            Vector.VectorPb<object> vector = new Vector.VectorPb<object>(obj,count);
             object value = 5;
             int noOfValue = 0;
             var expectedResult = 1;
@@ -169,7 +169,7 @@ namespace VectorPb.Tests
             int count = 16;
             object[] obj = new object[16] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 5, 4, 4, 4, 3, 2, 1 };
 
-            Vector.VectorPb vector = new Vector.VectorPb(obj, count);
+            Vector.VectorPb<object> vector = new Vector.VectorPb<object>(obj, count);
             object value = 4;
             int noOfValue = 0;
             var expectedResult = 4;

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Vector
 {
-    public class VectorEnum: IEnumerator
+    public class VectorEnum <T> : IEnumerator
     {
-        private VectorPb vectorEnum;
+        private VectorPb<T> vectorEnum;
         private int position = -1;
 
-        public VectorEnum(VectorPb vector)
+        public VectorEnum(VectorPb<T> vector)
         {
             this.vectorEnum = vector;
         }

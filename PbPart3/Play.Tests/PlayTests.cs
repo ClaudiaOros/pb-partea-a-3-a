@@ -7,6 +7,7 @@ namespace Play.Tests
     [TestClass]
     public class PlayTests
     {
+       [Ignore]
         [TestMethod]
         public void Play1()
         {
@@ -26,6 +27,7 @@ namespace Play.Tests
             Assert.AreEqual(expectedMoves, totalMoves);
         }
 
+        [Ignore]
         [TestMethod]
         public void Play2()
         {
@@ -45,6 +47,7 @@ namespace Play.Tests
             Assert.AreEqual(expectedMoves, totalMoves);
         }
 
+        [Ignore]
         [TestMethod]
         public void Play3()
         {
@@ -64,6 +67,7 @@ namespace Play.Tests
             Assert.AreEqual(expectedMoves, totalMoves);
         }
 
+        [Ignore]
         [TestMethod]
         public void Play4()
         {
