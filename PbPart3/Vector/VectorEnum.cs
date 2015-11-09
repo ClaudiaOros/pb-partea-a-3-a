@@ -9,19 +9,18 @@ namespace Vector
 {
     public class VectorEnum: IEnumerator
     {
-        private VectorPb vector;
+        private VectorPb vectorEnum;
         private int position = -1;
 
-        public VectorEnum(VectorPb vector, int position)
+        public VectorEnum(VectorPb vector)
         {
-            this.position = position;
-            this.vector = vector;
+            this.vectorEnum = vector;
         }
 
        public  bool MoveNext()
         {
             position++;
-           return (position < vector.count);
+           return (position < vectorEnum.count);
         }
 
        public void Reset()
@@ -31,7 +30,7 @@ namespace Vector
 
        public object Current
        {
-           get { return vector.obj[position]; }
+           get { return vectorEnum.obj[position]; }
        }
 
     }

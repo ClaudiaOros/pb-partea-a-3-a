@@ -145,9 +145,41 @@ namespace VectorPb.Tests
         }
 
         [TestMethod]
-        public void Verify()
+        public void Verify_number_of_values_equal_to_5()
         {
- 
+            int count = 9;
+            object[] obj = new object[16] { 1, 2, 3, 4, 5, 6, 7, 8, 9, null, null, null, null, null, null, null };
+
+            Vector.VectorPb vector = new Vector.VectorPb(obj,count);
+            object value = 5;
+            int noOfValue = 0;
+            var expectedResult = 1;
+            foreach (object ob in vector)
+            {
+                if (ob.Equals(value))
+                    noOfValue++; 
+            }
+
+            Assert.AreEqual(expectedResult, noOfValue);
+        }
+
+        [TestMethod]
+        public void Verify_number_of_values_equal_to_4()
+        {
+            int count = 16;
+            object[] obj = new object[16] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 5, 4, 4, 4, 3, 2, 1 };
+
+            Vector.VectorPb vector = new Vector.VectorPb(obj, count);
+            object value = 4;
+            int noOfValue = 0;
+            var expectedResult = 4;
+            foreach (object ob in vector)
+            {
+                if (ob.Equals(value))
+                    noOfValue++;
+            }
+
+            Assert.AreEqual(expectedResult, noOfValue);
         }
 
             
