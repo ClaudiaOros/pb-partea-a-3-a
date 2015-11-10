@@ -185,11 +185,20 @@ namespace VectorPb.Tests
         }
 
         [TestMethod]
-        public void Verify_sorted_array_of_objects_after_adding_a_new_object()
+        public void Verify_sorted_array_of_objects_after_adding_a_new_element()
         {
-            int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var count = 8;
+            int[] array = { 1, 2, 3, 4, 6, 7, 8, 9 };
+            int[] expectedArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             Vector.SortedVector<int> expectedVector = new Vector.SortedVector<int>() ;
-            Vector.SortedVector<int> sortedVector = new Vector.SortedVector<int>() { 1, 2, 3, 4, 6, 7, 8, 9 };
+            Vector.SortedVector<int> sortedVector = new Vector.SortedVector<int>();
+
+            for (int i = 0; i < expectedArray.Length; i++)
+                expectedVector.Add(expectedArray[i]);
+
+            for (int i = 0; i < array.Length; i++)
+                sortedVector.Add(array[i]);
+
             sortedVector.Add(5);
 
             Assert.AreEqual(expectedVector,sortedVector);

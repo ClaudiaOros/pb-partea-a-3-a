@@ -10,10 +10,18 @@ namespace Vector
     {
         public override void Add(T element)
         {
+            if (obj == null)
+            {
+                Array.Resize(ref obj, 1);
+                obj[0] = element;
+            }
+            else
+
             for (int i = 0; i < obj.Length; i++)
-                if (obj[i].CompareTo(element) < 0)
+                if (obj[i].CompareTo(element) > 0)
                 {
-                    Insert(i, element);
+                    Array.Resize(ref obj, obj.Length + 1);
+                    obj = ShiftRight(i+1, element);
                 }                        
         }
 

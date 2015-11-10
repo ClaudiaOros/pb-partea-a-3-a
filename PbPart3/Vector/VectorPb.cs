@@ -72,7 +72,7 @@ namespace Vector
             return obj;
         }
 
-        private T[] ResizeArrayAndInsertAnElement(int position, T element)
+        public T[] ResizeArrayAndInsertAnElement(int position, T element)
         {
             var obj2 = new T[count * 2];
 
@@ -152,6 +152,17 @@ namespace Vector
             {
                 obj[j] = obj[j + 1];
             }
+        }
+
+        public T[] ShiftRight(int position, T element)
+        {
+            for (int i = position-1; i < obj.Length-1 ; i++)
+            {
+                obj[i + 1] = obj[i];
+            }
+
+            obj[position] = element;
+            return obj;
         }
 
         public T[] Remove(int index)
