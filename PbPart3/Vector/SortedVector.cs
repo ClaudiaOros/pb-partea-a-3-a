@@ -18,7 +18,7 @@ namespace Vector
             else
 
             for (int i = 0; i < obj.Length; i++)
-                if (obj[i].CompareTo(element) > 0)
+                if (obj[i].CompareTo(element) < 0)
                 {
                     Array.Resize(ref obj, obj.Length + 1);
                     obj = ShiftRight(i+1, element);
