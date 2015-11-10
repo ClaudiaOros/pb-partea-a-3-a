@@ -8,10 +8,15 @@ using System.Threading.Tasks;
 namespace Vector
 {
 
-    public class VectorPb <T> : IEnumerable
+    public class VectorPb<T> : IEnumerable
     {
         public int count;
         public T[] obj;
+
+        public VectorPb()
+        {
+ 
+        }
 
         public VectorPb(T[] obj, int count)
         {
@@ -19,17 +24,17 @@ namespace Vector
             this.obj = obj;
         }
 
-        public T[] Add(T element)
+        public virtual void Add(T element)
         {
             if (count % 8 == 0)
             {
                 var obj2 = new T[count * 2];
                 Copy(obj2);
                 obj2[count] = element;
-                return obj2;
+
             }
-            obj[count] = element;
-            return obj;
+            else
+                obj[count] = element;
         }
 
         private void Copy(T[] obj2)

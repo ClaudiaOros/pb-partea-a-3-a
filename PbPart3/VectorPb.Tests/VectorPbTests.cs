@@ -17,7 +17,8 @@ namespace VectorPb.Tests
             var vector = new Vector.VectorPb<object>(obj,count);
 
             object elementToBeAdded = 9;
-            var resultedVector = vector.Add(elementToBeAdded);
+            vector.Add(elementToBeAdded);
+            var resultedVector = vector.GetData();
 
             CollectionAssert.AreEqual(expectedVector, resultedVector);
         }
@@ -31,7 +32,8 @@ namespace VectorPb.Tests
             var vector = new Vector.VectorPb<object>(obj, count);
 
             object elementToBeAdded = 9;
-            var resultedVector = vector.Add(elementToBeAdded);
+            vector.Add(elementToBeAdded);
+            var resultedVector = vector.GetData();
 
             CollectionAssert.AreEqual(expectedVector, resultedVector);
         }
@@ -180,6 +182,17 @@ namespace VectorPb.Tests
             }
 
             Assert.AreEqual(expectedResult, noOfValue);
+        }
+
+        [TestMethod]
+        public void Verify_sorted_array_of_objects_after_adding_a_new_object()
+        {
+            int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            Vector.SortedVector<int> expectedVector = new Vector.SortedVector<int>() ;
+            Vector.SortedVector<int> sortedVector = new Vector.SortedVector<int>() { 1, 2, 3, 4, 6, 7, 8, 9 };
+            sortedVector.Add(5);
+
+            Assert.AreEqual(expectedVector,sortedVector);
         }
 
             

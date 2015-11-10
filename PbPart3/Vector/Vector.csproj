@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SortedVector.cs" />
     <Compile Include="VectorEnum.cs" />
     <Compile Include="VectorPb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
