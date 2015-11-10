@@ -201,7 +201,27 @@ namespace VectorPb.Tests
 
             sortedVector.Add(5);
 
-            Assert.AreEqual(expectedVector,sortedVector);
+            Assert.AreEqual(expectedVector.count,sortedVector.count);
+        }
+
+        [TestMethod]
+        public void Verify_sorted_array_of_objects_after_adding_a_new_element2()
+        {
+            var count = 2;
+            int[] array = { 1};
+            int[] expectedArray = { 1, 2 };
+            Vector.SortedVector<int> expectedVector = new Vector.SortedVector<int>();
+            Vector.SortedVector<int> sortedVector = new Vector.SortedVector<int>();
+
+            for (int i = 0; i < expectedArray.Length; i++)
+                expectedVector.Add(expectedArray[i]);
+
+            for (int i = 0; i < array.Length; i++)
+                sortedVector.Add(array[i]);
+
+            sortedVector.Add(2);
+
+            Assert.AreEqual(expectedVector.count, sortedVector.count);
         }
 
             
